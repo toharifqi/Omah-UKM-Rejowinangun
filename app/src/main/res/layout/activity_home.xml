@@ -221,6 +221,12 @@
                         android:textAllCaps="true"
                         android:textColor="@color/colorPrimary" />
                 </LinearLayout>
+                <fragment
+                    android:id="@+id/productFragment"
+                    android:name="com.toharifqi.um.ukmq.fragment.ProductFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
 
                 <View
                     android:layout_width="match_parent"

@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.bumptech.glide.Glide;
 import com.toharifqi.um.ukmq.R;
 import com.toharifqi.um.ukmq.model.ProductModel;
 
@@ -42,8 +45,35 @@ public class ProductAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater =  LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.)
+        View view = layoutInflater.inflate(R.layout.item_product, container, false);
 
-        return super.instantiateItem(container, position);
+        ImageView productImage;
+        TextView productName, productPrice, productCity;
+
+        productImage = view.findViewById(R.id.product_image);
+        productName = view.findViewById(R.id.product_name);
+        productPrice = view.findViewById(R.id.product_price);
+        productCity = view.findViewById(R.id.product_city);
+
+        Glide.with(context).load(productList.get(position).getProductPic()).into(productImage);
+        productName.setText(productList.get(position).getProductName());
+        productPrice.setText("Rp. " + productList.get(position).getProductPrice());
+        productCity.setText(productList.get(position).getProductCity());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               //do something here to go to product activity
+            }
+        });
+
+        container.addView(view, 0);
+
+        return view;
+    }
+
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        container.removeView((View)object);
     }
 }

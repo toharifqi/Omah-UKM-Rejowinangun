@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="200dp"
-    android:layout_height="wrap_content"
+    android:layout_height="290dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="8sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             android:text="Kemeja Batik Hem Edy Seragam Katun Strech"
             />
@@ -56,16 +56,19 @@
             android:textColor="@color/colorAccent"/>
         <TextView
             android:id="@+id/product_city"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
             android:text="Jakarta Timur"
-            android:textSize="8sp"
+            android:textSize="10sp"
             android:layout_gravity="center"/>
         <LinearLayout
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:gravity="center"
+
             android:background="@color/colorPrimary">
             <TextView
                 android:layout_width="wrap_content"

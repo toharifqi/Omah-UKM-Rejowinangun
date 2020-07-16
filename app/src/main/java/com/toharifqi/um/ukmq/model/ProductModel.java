@@ -1,16 +1,20 @@
 package com.toharifqi.um.ukmq.model;
 
+import android.content.Intent;
+
 public class ProductModel {
-    String productPic, productName, productPrice, productCity;
+    String productPic, productName, productCity, productId;
+    int productPrice;
 
     public ProductModel() {
     }
 
-    public ProductModel(String productPic, String productName, String productPrice, String productCity) {
+    public ProductModel(String productPic, String productName, int productPrice, String productCity, String productId) {
         this.productPic = productPic;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productCity = productCity;
+        this.productId = productId;
     }
 
     public String getProductPic() {
@@ -29,11 +33,11 @@ public class ProductModel {
         this.productName = productName;
     }
 
-    public String getProductPrice() {
+    public int getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(String productPrice) {
+    public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
     }
 
@@ -43,5 +47,13 @@ public class ProductModel {
 
     public void setProductCity(String productCity) {
         this.productCity = productCity;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 }
