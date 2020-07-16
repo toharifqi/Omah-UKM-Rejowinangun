@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/navigation_bg"
+        android:scaleType="centerCrop"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:gravity="bottom"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/header_linearlayout"
+            android:transitionName="header_animate"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/main_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:transitionName="logo_animate"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UKM"
+                    android:layout_marginBottom="-10dp"
+                    android:textColor="@color/white"
+                    android:textSize="68sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="-10dp"
+                    android:text="Q"
+                    android:textColor="@color/orangeDark"
+                    android:textSize="68sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/slogan_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:transitionName="slogan_animate"
+                android:text="Ini isi apa gitu slogannya"
+                android:textStyle="italic"
+                android:layout_marginTop="-5dp"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="anonymous@gmail.com"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anonymous Name"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

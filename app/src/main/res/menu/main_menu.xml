@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_user_profile"
+            android:title="Profil pengguna"
+            android:icon="@drawable/ic_baseline_person"/>
+        <item
+            android:id="@+id/nav_log_out"
+            android:title="Log out"
+            android:icon="@drawable/ic_baseline_lock_open"/>
+
+    </group>
+
+    <item android:title="Menu Utama">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_home"
+                    android:title="Kategori"
+                    android:icon="@drawable/ic_baseline_home"/>
+                <item
+                    android:id="@+id/nav_category"
+                    android:title="Kategori"
+                    android:icon="@drawable/ic_baseline_category"/>
+                <item
+                    android:id="@+id/nav_penawaran_projek"
+                    android:title="Penawaran Projek"
+                    android:icon="@drawable/ic_baseline_local_offer"/>
+                <item
+                    android:id="@+id/nav_projek_berjalan"
+                    android:title="Projek Berjalan"
+                    android:icon="@drawable/ic_baseline_access_time"/>
+                <item
+                    android:id="@+id/nav_trancsaction_history"
+                    android:title="History Transaksi"
+                    android:icon="@drawable/ic_payments_24px"/>
+                <item
+                    android:id="@+id/nav_investment_history"
+                    android:title="History Investasi"
+                    android:icon="@drawable/ic_baseline_assignment_ind_24"/>
+                <item
+                    android:id="@+id/nav_help"
+                    android:title="Bantuan"
+                    android:icon="@drawable/ic_baseline_help_24"/>
+                <item
+                    android:id="@+id/nav_faq"
+                    android:title="FAG (Tanaya Jawab)"
+                    android:icon="@drawable/ic_baseline_question_answer"/>
+                <item
+                    android:id="@+id/nav_news"
+                    android:title="News"
+                    android:icon="@drawable/ic_baseline_info_24"/>
+                <item
+                    android:id="@+id/nav_others"
+                    android:title="Lainnya"
+                    android:icon="@drawable/ic_baseline_youtube_searched_for"/>
+
+            </group>
+        </menu>
+    </item>
+
+</menu>
