@@ -14,7 +14,9 @@ import com.bumptech.glide.Glide;
 import com.toharifqi.um.ukmq.R;
 import com.toharifqi.um.ukmq.model.ProductModel;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class ProductAdapter extends PagerAdapter {
     private List<ProductModel> productList;
@@ -57,7 +59,8 @@ public class ProductAdapter extends PagerAdapter {
 
         Glide.with(context).load(productList.get(position).getProductPic()).into(productImage);
         productName.setText(productList.get(position).getProductName());
-        productPrice.setText("Rp. " + productList.get(position).getProductPrice());
+        String price = NumberFormat.getNumberInstance(Locale.GERMAN).format(productList.get(position).getProductPrice());
+        productPrice.setText("Rp. " + price);
         productCity.setText(productList.get(position).getProductCity());
 
         view.setOnClickListener(new View.OnClickListener() {

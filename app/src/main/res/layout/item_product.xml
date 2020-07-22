@@ -9,7 +9,7 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:layout_gravity="center"
     android:id="@+id/product_cardview"
-
+    app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true">
     <LinearLayout
         android:layout_width="match_parent"

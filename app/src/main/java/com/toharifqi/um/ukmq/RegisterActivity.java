@@ -174,7 +174,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()){
-                    Toast.makeText(RegisterActivity.this, "Anda berhasil terdaftar, silahkan login", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Anda berhasil terdaftar!", Toast.LENGTH_LONG).show();
                     onAuthSuccess(task.getResult().getUser());
 
                 }else {

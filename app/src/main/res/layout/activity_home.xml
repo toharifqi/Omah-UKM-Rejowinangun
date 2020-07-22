@@ -191,7 +191,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/coursetabbg"
+            android:background="@color/colorGreyLight"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
@@ -210,6 +210,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Produk UMKM"
+                        android:textStyle="bold"
                         android:textAllCaps="true" />
 
                     <TextView
@@ -227,17 +228,57 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="18dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Project UMKM"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/allProject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text="LIHAT SEMUA"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary" />
+                </LinearLayout>
+                <fragment
+                    android:id="@+id/projectFragment"
+                    android:name="com.toharifqi.um.ukmq.fragment.ProjectFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="60dp" />
-
             </LinearLayout>
 
 
         </androidx.core.widget.NestedScrollView>
 
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="28dp"
+            android:adjustViewBounds="false"
+            android:background="@color/colorWhite"
+            android:cropToPadding="false"
+            android:scaleType="centerCrop"
+            android:src="@drawable/plus"
+            app:backgroundTint="@color/colorWhite"
+            app:fabSize="normal" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 </androidx.drawerlayout.widget.DrawerLayout>

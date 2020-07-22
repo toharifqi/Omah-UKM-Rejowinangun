@@ -17,26 +17,26 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.toharifqi.um.ukmq.R;
-import com.toharifqi.um.ukmq.adapter.ProductAdapter;
-import com.toharifqi.um.ukmq.listener.IFirebaseLoadDoneProduct;
-import com.toharifqi.um.ukmq.model.ProductModel;
+import com.toharifqi.um.ukmq.adapter.ProjectAdapter;
+import com.toharifqi.um.ukmq.listener.IFirebaseLoadDoneProject;
+import com.toharifqi.um.ukmq.model.ProjectModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductFragment extends Fragment implements IFirebaseLoadDoneProduct {
-    ViewPager viewPagerProduct;
-    ProductAdapter productAdapter;
+public class ProjectFragment extends Fragment implements IFirebaseLoadDoneProject {
+    ViewPager viewPagerProject;
+    ProjectAdapter projectAdapter;
 
-    IFirebaseLoadDoneProduct iFirebaseLoadDone;
+    IFirebaseLoadDoneProject iFirebaseLoadDone;
 
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            List<ProductModel> productList = new ArrayList<>();
+            List<ProjectModel> projectList = new ArrayList<>();
             for (DataSnapshot productSnapshot:dataSnapshot.getChildren())
-                productList.add(productSnapshot.getValue(ProductModel.class));
-            iFirebaseLoadDone.onFirebaseLoadSuccess(productList);
+                projectList.add(productSnapshot.getValue(ProjectModel.class));
+            iFirebaseLoadDone.onFirebaseLoadSuccess(projectList);
         }
 
         @Override
@@ -48,24 +48,24 @@ public class ProductFragment extends Fragment implements IFirebaseLoadDoneProduc
     Query query;
     View view;
 
-    public ProductFragment(){
+    public ProjectFragment(){
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_product, container, false);
-        query = FirebaseDatabase.getInstance().getReference("products");
+        view = inflater.inflate(R.layout.fragment_project, container, false);
+        query = FirebaseDatabase.getInstance().getReference("projects");
 
         iFirebaseLoadDone = this;
 
-        loadProduct();
+        loadProject();
 
-        viewPagerProduct = (ViewPager) view.findViewById(R.id.productViewPager);
-        viewPagerProduct.setPadding(20,0,540,0);
-        viewPagerProduct.setPageMargin(18);
-        viewPagerProduct.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPagerProject = (ViewPager) view.findViewById(R.id.projectViewPager);
+        viewPagerProject.setPadding(20,0,200,0);
+        viewPagerProject.setPageMargin(18);
+        viewPagerProject.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -85,14 +85,14 @@ public class ProductFragment extends Fragment implements IFirebaseLoadDoneProduc
         return view;
     }
 
-    private void loadProduct() {
+    private void loadProject() {
         query.addValueEventListener(valueEventListener);
     }
 
     @Override
-    public void onFirebaseLoadSuccess(List<ProductModel> productList) {
-        productAdapter = new ProductAdapter(productList, getContext());
-        viewPagerProduct.setAdapter(productAdapter);
+    public void onFirebaseLoadSuccess(List<ProjectModel> projectList) {
+        projectAdapter = new ProjectAdapter(projectList, getContext());
+        viewPagerProject.setAdapter(projectAdapter);
     }
 
     @Override

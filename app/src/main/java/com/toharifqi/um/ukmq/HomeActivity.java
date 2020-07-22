@@ -20,6 +20,7 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +45,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     ImageView menuIcon;
     CoordinatorLayout contentView;
+
+    String tipeUser;
 
     //Drawer menu
     DrawerLayout drawerLayout;
@@ -91,10 +94,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         final int greeting = Integer.parseInt(String.valueOf(dateFormat.format(c)));
 
 
+        //drawer menu stuff
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView userEmail = headerView.findViewById(R.id.user_email);
+        final TextView userNameD = headerView.findViewById(R.id.user_name);
+        userEmail.setText(fAuth.getCurrentUser().getEmail());
+
         userDb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String userName = dataSnapshot.child("userName").getValue().toString();
+                userNameD.setText(userName);
+                tipeUser = dataSnapshot.child("tipe_user").getValue().toString();
                 if (greeting > 0 && greeting <= 11) {
                     txtGreeting.setText("Selamat Pagi, " + userName);
                 } else if (greeting > 11 && greeting <= 15) {
@@ -111,6 +124,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        //fab
+        final FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (tipeUser.equals("1")){
+                    startActivity(new Intent(HomeActivity.this, AddProduct.class));
+                }else{
+                    startActivity(new Intent(HomeActivity.this, AddProject.class));
+                }
             }
         });
 
@@ -157,9 +183,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         menuIcon = findViewById(R.id.menu_icon);
         contentView = findViewById(R.id.content_view);
 
-        //drawer menu stuff
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
+
 
         navigationDrawer();
     }

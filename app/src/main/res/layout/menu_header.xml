@@ -60,6 +60,7 @@
 
         </LinearLayout>
         <TextView
+            android:id="@+id/user_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="anonymous@gmail.com"
@@ -67,6 +68,7 @@
             android:textStyle="bold"
             android:textSize="18sp" />
         <TextView
+            android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Anonymous Name"

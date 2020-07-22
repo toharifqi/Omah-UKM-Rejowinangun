@@ -11,4 +11,5 @@
     <color name="colorGreyLight">#F0F0F0</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorGreyShimmer">#569C9C9C</color>
+    <color name="colorGold">#FFC000</color>
 </resources>
