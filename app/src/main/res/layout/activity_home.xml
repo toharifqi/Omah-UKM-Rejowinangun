@@ -226,7 +226,8 @@
                     android:id="@+id/productFragment"
                     android:name="com.toharifqi.um.ukmq.fragment.ProductFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -278,6 +279,7 @@
             android:cropToPadding="false"
             android:scaleType="centerCrop"
             android:src="@drawable/plus"
+            app:tint="@null"
             app:backgroundTint="@color/colorWhite"
             app:fabSize="normal" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

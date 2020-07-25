@@ -87,6 +87,4 @@
                 android:background="@drawable/invest_button"/>
         </LinearLayout>
     </RelativeLayout>
-
-
 </androidx.cardview.widget.CardView>

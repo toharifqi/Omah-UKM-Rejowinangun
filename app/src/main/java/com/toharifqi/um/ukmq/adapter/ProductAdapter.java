@@ -63,6 +63,8 @@ public class ProductAdapter extends PagerAdapter {
         productPrice.setText("Rp. " + price);
         productCity.setText(productList.get(position).getProductCity());
 
+        final ProductModel product = productList.get(position);
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

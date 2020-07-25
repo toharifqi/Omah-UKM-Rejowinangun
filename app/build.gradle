@@ -54,4 +54,10 @@ dependencies {
 
     //image slider
     implementation 'com.github.denzcoskun:ImageSlideshow:0.0.7'
+
+    //material styled dialog
+    implementation 'com.github.javiersantos:MaterialStyledDialogs:2.1'
+
+    //toasty
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
 }

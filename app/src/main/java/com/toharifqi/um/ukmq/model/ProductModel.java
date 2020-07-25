@@ -2,31 +2,36 @@ package com.toharifqi.um.ukmq.model;
 
 import android.content.Intent;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class ProductModel {
-    String productPic, productName, productCity, productId, productCat, productCode, productDesc;
+    String productCode, productName, productDesc, productCat, productCity, productId, productPic;
     int productPrice, productStock;
 
     public ProductModel() {
     }
 
-    public ProductModel(String productPic, String productName, String productCity, String productId, String productCat, String productCode, String productDesc, int productPrice, int productStock) {
-        this.productPic = productPic;
+    public ProductModel(String productCode, String productName, String productDesc, String productCat, String productCity, String productId, String productPic, int productPrice, int productStock) {
+        this.productCode = productCode;
         this.productName = productName;
+        this.productDesc = productDesc;
+        this.productCat = productCat;
         this.productCity = productCity;
         this.productId = productId;
-        this.productCat = productCat;
-        this.productCode = productCode;
-        this.productDesc = productDesc;
+        this.productPic = productPic;
         this.productPrice = productPrice;
         this.productStock = productStock;
     }
 
-    public String getProductPic() {
-        return productPic;
+    public String getProductCode() {
+        return productCode;
     }
 
-    public void setProductPic(String productPic) {
-        this.productPic = productPic;
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 
     public String getProductName() {
@@ -35,6 +40,22 @@ public class ProductModel {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public String getProductDesc() {
+        return productDesc;
+    }
+
+    public void setProductDesc(String productDesc) {
+        this.productDesc = productDesc;
+    }
+
+    public String getProductCat() {
+        return productCat;
+    }
+
+    public void setProductCat(String productCat) {
+        this.productCat = productCat;
     }
 
     public String getProductCity() {
@@ -53,28 +74,12 @@ public class ProductModel {
         this.productId = productId;
     }
 
-    public String getProductCat() {
-        return productCat;
+    public String getProductPic() {
+        return productPic;
     }
 
-    public void setProductCat(String productCat) {
-        this.productCat = productCat;
-    }
-
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
-
-    public String getProductDesc() {
-        return productDesc;
-    }
-
-    public void setProductDesc(String productDesc) {
-        this.productDesc = productDesc;
+    public void setProductPic(String productPic) {
+        this.productPic = productPic;
     }
 
     public int getProductPrice() {
@@ -91,5 +96,19 @@ public class ProductModel {
 
     public void setProductStock(int productStock) {
         this.productStock = productStock;
+    }
+
+    public Map<String, Object> addProduct() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("productCode", productCode);
+        result.put("productName", productName);
+        result.put("productDesc", productDesc);
+        result.put("productCat", productCat);
+        result.put("productCity", productCity);
+        result.put("productId", productId);
+        result.put("productPic", productPic);
+        result.put("productPrice", productPrice);
+        result.put("productStock", productStock);
+        return  result;
     }
 }

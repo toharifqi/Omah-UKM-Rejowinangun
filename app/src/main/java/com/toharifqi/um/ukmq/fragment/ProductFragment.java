@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ import java.util.List;
 public class ProductFragment extends Fragment implements IFirebaseLoadDoneProduct {
     ViewPager viewPagerProduct;
     ProductAdapter productAdapter;
+    LinearLayout shimmerLayout;
 
     IFirebaseLoadDoneProduct iFirebaseLoadDone;
 
@@ -62,6 +64,8 @@ public class ProductFragment extends Fragment implements IFirebaseLoadDoneProduc
 
         loadProduct();
 
+        shimmerLayout = view.findViewById(R.id.shimmer_product);
+
         viewPagerProduct = (ViewPager) view.findViewById(R.id.productViewPager);
         viewPagerProduct.setPadding(20,0,540,0);
         viewPagerProduct.setPageMargin(18);
@@ -93,6 +97,8 @@ public class ProductFragment extends Fragment implements IFirebaseLoadDoneProduc
     public void onFirebaseLoadSuccess(List<ProductModel> productList) {
         productAdapter = new ProductAdapter(productList, getContext());
         viewPagerProduct.setAdapter(productAdapter);
+        shimmerLayout.setVisibility(View.GONE);
+        viewPagerProduct.setVisibility(View.VISIBLE);
     }
 
     @Override

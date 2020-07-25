@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ import java.util.List;
 public class ProjectFragment extends Fragment implements IFirebaseLoadDoneProject {
     ViewPager viewPagerProject;
     ProjectAdapter projectAdapter;
+    LinearLayout shimmerProject;
 
     IFirebaseLoadDoneProject iFirebaseLoadDone;
 
@@ -58,6 +60,7 @@ public class ProjectFragment extends Fragment implements IFirebaseLoadDoneProjec
         view = inflater.inflate(R.layout.fragment_project, container, false);
         query = FirebaseDatabase.getInstance().getReference("projects");
 
+        shimmerProject = view.findViewById(R.id.shimmer_project);
         iFirebaseLoadDone = this;
 
         loadProject();
@@ -93,6 +96,8 @@ public class ProjectFragment extends Fragment implements IFirebaseLoadDoneProjec
     public void onFirebaseLoadSuccess(List<ProjectModel> projectList) {
         projectAdapter = new ProjectAdapter(projectList, getContext());
         viewPagerProject.setAdapter(projectAdapter);
+        shimmerProject.setVisibility(View.GONE);
+        viewPagerProject.setVisibility(View.VISIBLE);
     }
 
     @Override
