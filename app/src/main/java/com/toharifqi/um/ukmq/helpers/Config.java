@@ -6,4 +6,5 @@ public class Config {
     public final static String IMAGE_URL_NULL_MESSAGE="Pilihlah gambar produk!";
     public final static String STORAGE_PATH="cover_photo/";
     public final static String BOOK_ADD_SUCCESS_MSG="Produk berhasil ditambahkan!";
+    public final static String PRODUCT_MODEL="productModelParcelable";
 }

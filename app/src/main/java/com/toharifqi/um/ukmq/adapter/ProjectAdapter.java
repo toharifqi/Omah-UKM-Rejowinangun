@@ -1,10 +1,11 @@
 package com.toharifqi.um.ukmq.adapter;
 
 import android.content.Context;
-import android.text.Layout;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.toharifqi.um.ukmq.ProjectActivity;
 import com.toharifqi.um.ukmq.R;
 import com.toharifqi.um.ukmq.model.ProjectModel;
 
@@ -51,6 +53,7 @@ public class ProjectAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.item_project, container, false);
 
         ImageView projectImage;
+        Button investButton;
         TextView projectName, projectCity, projectCorp, projectPrice;
 
         projectImage = view.findViewById(R.id.project_image);
@@ -58,18 +61,20 @@ public class ProjectAdapter extends PagerAdapter {
         projectCity = view.findViewById(R.id.project_city);
         projectCorp = view.findViewById(R.id.project_owner);
         projectPrice = view.findViewById(R.id.project_price);
+        investButton = view.findViewById(R.id.invest_button);
 
         Glide.with(context).load(projectList.get(position).getProjectPic()).into(projectImage);
         projectName.setText(projectList.get(position).getProjectName());
         projectCity.setText(projectList.get(position).getProjectCity());
-        projectCorp.setText(projectList.get(position).getProjectCorp());
+        projectCorp.setText(projectList.get(position).getProjectCode());
         String price = NumberFormat.getNumberInstance(Locale.GERMAN).format(projectList.get(position).getProjectPrice());
         projectPrice.setText("Rp. " + price);
 
-        view.setOnClickListener(new View.OnClickListener() {
+        investButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //do something here dude
+                context.startActivity(new Intent(context, ProjectActivity.class));
             }
         });
 

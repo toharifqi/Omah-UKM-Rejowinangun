@@ -14,8 +14,15 @@
         android:layout_gravity="start"
         android:background="@color/white"
         android:theme="@style/navigationTheme"
-        app:headerLayout="@layout/menu_header"
-        app:menu="@menu/main_menu" />
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:headerLayout="@layout/menu_header">
+        <ExpandableListView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/expand_menu"/>
+
+    </com.google.android.material.navigation.NavigationView>
     
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/content_view"

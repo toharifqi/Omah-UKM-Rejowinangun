@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProjectActivity">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:adjustViewBounds="false"
+        android:background="@color/colorWhite"
+        android:layout_margin="18dp"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_orange"
+        app:tint="@null"
+        app:backgroundTint="@color/colorWhite"
+        app:fabSize="normal" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:padding="28dp">
+            <LinearLayout
+                android:layout_marginTop="70dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_receipt_long_24dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Detail Penawaran Project"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="20dp"
+                    android:orientation="horizontal">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/placeholder"
+                        android:scaleType="centerCrop"/>
+                    <LinearLayout
+                        android:layout_marginLeft="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/product_corp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Deni Corp"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:id="@+id/product_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pacitan city"
+                            android:textSize="18sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardUseCompatPadding="true">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/yellowPale"
+                        android:orientation="vertical"
+                        android:padding="18dp">
+                        <TextView
+                            android:id="@+id/project_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:layout_marginBottom="8dp"
+                            android:textColor="@color/colorBlack"
+                            android:text="Penambahan Diversifikasi Produk"/>
+                        <TextView
+                            android:id="@+id/project_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:text="@string/lipsum_paragraph"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_baseline_monetization_on_orange"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Metode Pembayaran"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginTop="8dp"
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:padding="18dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="E - WALLET" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pembayaran terhubung langsung dengan akun e-wallet kamu"
+                            android:textSize="10sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <RadioGroup
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <RadioButton
+                                    android:layout_width="32dp"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton
+                                    android:layout_width="32dp"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginBottom="9dp"
+                                    android:src="@drawable/gopay_ic" />
+                                <ImageView
+                                    android:layout_width="61dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginTop="9dp"
+                                    android:src="@drawable/ovo_ic" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginTop="8dp"
+                    app:cardUseCompatPadding="true">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:padding="18dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TRANSFER VIRTUAL ACCOUNT"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dengan kode unik, semua jadi cepat"
+                            android:textSize="10sp"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <RadioGroup
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <RadioButton
+                                    android:layout_width="32dp"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton
+                                    android:layout_width="32dp"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton
+                                    android:layout_width="32dp"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton
+                                    android:layout_width="32dp"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginVertical="9dp"
+                                    android:src="@drawable/bca_ic" />
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginVertical="9dp"
+                                    android:src="@drawable/bni_ic" />
+                                <ImageView
+                                    android:layout_width="90dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginVertical="9dp"
+                                    android:src="@drawable/mandiri_ic" />
+                                <ImageView
+                                    android:layout_width="90dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginVertical="9dp"
+                                    android:src="@drawable/bri_ic" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    android:layout_marginTop="8dp"
+                    app:cardUseCompatPadding="true">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:padding="18dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MINIMARKET"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Transaksi bisa diselesaikan langsung di cabang terdekat"
+                            android:textSize="10sp"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <RadioGroup
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <RadioButton
+                                    android:layout_width="32dp"
+                                    android:layout_height="wrap_content" />
+                                <RadioButton
+                                    android:layout_width="32dp"
+                                    android:layout_height="wrap_content" />
+                            </RadioGroup>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:layout_marginBottom="9dp"
+                                    android:orientation="horizontal">
+                                    <ImageView
+                                        android:layout_width="50dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/alfamart_ic" />
+                                    <ImageView
+                                        android:layout_width="89dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/alfamidi_ic" />
+                                    <ImageView
+                                        android:layout_width="89dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/lawson_ic" />
+                                </LinearLayout>
+                                <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginTop="9dp"
+                                    android:src="@drawable/indomaret_ic" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"/>
+
+            </LinearLayout>
+        </ScrollView>
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/shadow_product" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="18dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kebutuhan Investasi"
+                        android:textSize="18dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:text="Return"
+                        android:textColor="@color/colorGreen"
+                        android:textSize="18dp" />
+                    <TextView
+                        android:id="@+id/project_return"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30% dari Laba"
+                        android:textColor="@color/colorGreen"
+                        android:textSize="28dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/project_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp. 10.000.000"
+                        android:textSize="18dp"
+                        android:textColor="@color/colorGold"
+                        android:textStyle="bold"/>
+                    <Button
+                        android:id="@+id/investbutton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="18dp"
+                        android:paddingHorizontal="28dp"
+                        android:gravity="center"
+                        android:layout_marginTop="8dp"
+                        android:textSize="18sp"
+                        android:drawableLeft="@drawable/ic_payments_white"
+                        android:text="Invest" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

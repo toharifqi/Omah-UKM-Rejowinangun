@@ -1,19 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddProject">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="add Project bro"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        tools:context=".AddProduct">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Light">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:textAlignment="center">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Tambah Project"
+                    android:textAlignment="textStart"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/toolbar_dropshadow" />
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="none">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="24.0dp"
+                android:paddingStart="24.0dp"
+                android:paddingRight="24.0dp"
+                android:paddingEnd="24.0dp"
+                android:paddingBottom="100dip">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/project_code"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Nama Usaha/Kode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_baseline_home_orange"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/project_city"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Asal Kota">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_baseline_location_on_orange"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/project_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Nama Project">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_person_orange"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/project_price"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Kebutuhan Investasi">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_baseline_local_offer_orange"
+                        android:inputType="number"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/project_return"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Return">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_baseline_stock_orange"
+                        android:inputType="number"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/project_desc"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Deskripsi Project">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="8"
+                        android:minLines="4"
+                        android:drawableStart="@drawable/ic_baseline_description_24"
+                        android:inputType="textMultiLine"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Unggah Foto Project"
+                    android:textSize="16sp"/>
+                <ImageView
+                    android:background="@color/colorGreyLight"
+                    android:padding="2dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/project_image"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/upload_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Pastikan data yang anda isikan telah benar sebelum menekan tombol Tambahkan!"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:rotation="180"
+        android:background="@drawable/toolbar_dropshadow" />
+
+    <LinearLayout
+        android:baselineAligned="false"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btnSignInWrapper"
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:layout_gravity="end"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <Button
+            android:id="@+id/add_project"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="10dp"
+            android:text="TAMBAHKAN"
+            android:letterSpacing="0.1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,70 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ProductActivity">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:adjustViewBounds="false"
+        android:background="@color/colorWhite"
+        android:layout_margin="18dp"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_orange"
+        app:tint="@null"
+        app:backgroundTint="@color/colorWhite"
+        app:fabSize="normal" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:background="#F4F4F4">
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="44dp"
+            android:src="@drawable/product_placeholder"/>
 
+    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:overScrollMode="never">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <RelativeLayout
-                android:paddingTop="20dp"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="480dp"
-                android:background="#F4F4F4">
-                <ImageView
-                    android:id="@+id/product_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="44dp"
-                    android:src="@drawable/product_placeholder"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="@drawable/shadow_product"
-                    android:layout_alignParentBottom="true"/>
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:adjustViewBounds="false"
-                    android:background="@color/colorWhite"
-                    android:layout_margin="18dp"
-                    android:cropToPadding="false"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/plus"
-                    app:tint="@null"
-                    app:backgroundTint="@color/colorWhite"
-                    app:fabSize="normal" />
-            </RelativeLayout>
+                android:layout_height="450dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/shadow_product" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="28dp">
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="6dp"
+                        android:layout_marginBottom="18dp"
+                        android:background="@drawable/rounded_bar"
+                        android:layout_gravity="center"/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="DENI CORP PACITAN"
-                        android:textColor="@color/md_material_blue_600"/>
-                    <TextView
+                        android:id="@+id/product_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kaos Oblong Merah"
                         android:textStyle="bold"
-                        android:textSize="24sp"/>
+                        android:textSize="28sp"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -75,6 +80,7 @@
                             android:layout_height="wrap_content"
                             app:srcCompat="@drawable/ic_baseline_local_offer_gold"/>
                         <TextView
+                            android:id="@+id/product_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rp. 400.000"
@@ -85,16 +91,21 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"/>
                         <TextView
+                            android:id="@+id/product_stock"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Stock: 4 pcs"
                             android:layout_gravity="center"/>
                     </LinearLayout>
+
                     <TextView
+                        android:id="@+id/product_cat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
                         android:text="Kategori: baju kaos"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -102,61 +113,86 @@
                         android:layout_marginVertical="8dp"
                         android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/product_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sed nunc nunc, commodo nec tortor a, consectetur efficitur elit. Vivamus id dictum nulla. Mauris dictum nunc ac urna tincidunt ullamcorper. Vestibulum erat ligula, accumsan vitae orci ultrices, rhoncus porta turpis. "/>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginBottom="18dp"
+                        android:background="@drawable/rounded_bar"
+                        android:layout_gravity="center"
+                        android:layout_marginVertical="18dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/placeholder"
+                            android:scaleType="centerCrop"/>
+                        <LinearLayout
+                            android:layout_marginLeft="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/product_corp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DENI CORP PACITAN"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/product_city"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pacitan city" />
+                        </LinearLayout>
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:padding="8dp"
+                            android:layout_weight="1"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorDarkGrey"
+                            android:backgroundTint="@color/white"
+                            android:textAlignment="textStart"
+                            android:drawableLeft="@drawable/ic_baseline_home"
+                            android:text="Kunjungi UKM"/>
+                    </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="4dp"
                     android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <Button
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:padding="8dp"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:gravity="center"
-                        android:padding="20dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:background="@color/md_material_blue_600">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_baseline_shopping_cart"/>
-                        <TextView
-                            android:layout_marginLeft="8dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tambahkan ke Keranjang"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        android:backgroundTint="@color/md_material_blue_600"
+                        android:textAlignment="textStart"
+                        android:drawableLeft="@drawable/ic_add_shopping_cart_black_24dp"
+                        android:text="Tambahkan ke Keranjang"/>
+                    <Button
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:padding="8dp"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:padding="20dp"
-                        android:gravity="center"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:background="@color/colorPrimary">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_baseline_shopping_cart"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:text="Beli Sekarang"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"/>
-                    </LinearLayout>
+                        android:textSize="12sp"
+                        android:textAlignment="textStart"
+                        android:drawableLeft="@drawable/ic_baseline_shopping_cart"
+                        android:text="Beli\nSekarang" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -164,4 +200,4 @@
     </ScrollView>
 
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

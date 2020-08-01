@@ -1,6 +1,7 @@
 package com.toharifqi.um.ukmq.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.toharifqi.um.ukmq.ProductActivity;
 import com.toharifqi.um.ukmq.R;
+import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.model.ProductModel;
 
 import java.text.NumberFormat;
@@ -69,6 +72,9 @@ public class ProductAdapter extends PagerAdapter {
             @Override
             public void onClick(View view) {
                //do something here to go to product activity
+                Intent intent = new Intent(context, ProductActivity.class);
+                intent.putExtra(Config.PRODUCT_MODEL, product);
+                context.startActivity(intent);
             }
         });
 

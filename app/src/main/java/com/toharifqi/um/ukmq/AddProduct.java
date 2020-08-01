@@ -21,7 +21,6 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -41,15 +40,12 @@ public class AddProduct extends AppCompatActivity {
 
     Toolbar mToolbar;
 
-    private static final String TAG = "NewPostActivity";
+    private static final String TAG = "NewProductActivity";
     private static final String REQUIRED = "Mohon masukkan data dengan benar.";
     private DatabaseReference mDatabaseReference;
     private StorageReference storageReference;
 
-    private FirebaseAuth mAuth;
-    private String userID;
-
-    TextInputLayout txtProductCode, txtProductName, txtProductDesc, txtProductCat, txtProductPrice, txtProductStock;
+    TextInputLayout txtProductCode, txtProductName, txtProductDesc, txtProductCat, txtProductPrice, txtProductStock, txtProductCity;
 
     private ImageView productPic;
     private Uri productPicUri;
@@ -75,6 +71,7 @@ public class AddProduct extends AppCompatActivity {
         txtProductCat = findViewById(R.id.product_cat);
         txtProductPrice = findViewById(R.id.product_price);
         txtProductStock = findViewById(R.id.product_stock);
+        txtProductCity = findViewById(R.id.product_city);
 
         productPic = findViewById(R.id.product_image);
         productPic.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +113,7 @@ public class AddProduct extends AppCompatActivity {
         final String productName = txtProductName.getEditText().getText().toString();
         final String productDesc = txtProductDesc.getEditText().getText().toString();
         final String productCat = txtProductCat.getEditText().getText().toString();
+        final String productCity = txtProductCity.getEditText().getText().toString();
         final int productPrice =  Integer.parseInt(txtProductPrice.getEditText().getText().toString());
         final int productStock = Integer.parseInt(txtProductStock.getEditText().getText().toString());
 
@@ -124,12 +122,12 @@ public class AddProduct extends AppCompatActivity {
         if (productCode.isEmpty()){
             showDialogNoInput();
             txtProductCode.setError(REQUIRED);
+        }else if (productCity.isEmpty()){
+            showDialogNoInput();
+            txtProductCity.setError(REQUIRED);
         }else if (productName.isEmpty()){
             showDialogNoInput();
             txtProductName.setError(REQUIRED);
-        }else if (productDesc.isEmpty()){
-            showDialogNoInput();
-            txtProductDesc.setError(REQUIRED);
         }else if (productCat.isEmpty()){
             showDialogNoInput();
             txtProductCat.setError(REQUIRED);
@@ -139,6 +137,9 @@ public class AddProduct extends AppCompatActivity {
         }else if (productStock == 0){
             showDialogNoInput();
             txtProductStock.setError(REQUIRED);
+        }else if (productDesc.isEmpty()){
+            showDialogNoInput();
+            txtProductDesc.setError(REQUIRED);
         }else if(isNullPhotoUrl){
             showDialogNoInput();
             Toasty.error(getApplicationContext(), Config.IMAGE_URL_NULL_MESSAGE, Toasty.LENGTH_SHORT, true).show();
@@ -147,7 +148,7 @@ public class AddProduct extends AppCompatActivity {
         }
 
         if (!isNullPhotoUrl){
-            writeNewPost(productCode, productName, productDesc, productCat, "Pacitan", productPrice, productStock, productPicUri);
+            writeNewPost(productCode, productName, productDesc, productCat, productCity, productPrice, productStock, productPicUri);
             setEditingEnabled(true);
         }
 

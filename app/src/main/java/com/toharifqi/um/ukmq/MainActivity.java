@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 Pair[] pairs = new Pair[2];
                 pairs[0] = new Pair<View, String>(mainLogo, "logo_animate");
                 pairs[1] = new Pair<View, String>(slogan_text, "slogan_animate");

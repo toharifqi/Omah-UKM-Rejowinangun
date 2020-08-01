@@ -1,30 +1,51 @@
 package com.toharifqi.um.ukmq.model;
 
-public class ProjectModel {
-    String projectCode, projectPic, projectName, projectCorp, projectCity, projectId, projectForm;
-    int projectPrice;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ProjectModel implements Parcelable {
+    String projectPic, projectName, projectCode, projectCity, projectId, projectDesc;
+    int projectPrice, projectReturn;
 
     public ProjectModel() {
     }
 
-    public ProjectModel(String projectCode, String projectPic, String projectName, String projectCorp, String projectCity, String projectId, String projectForm, int projectPrice) {
-        this.projectCode = projectCode;
+    public ProjectModel(String projectPic, String projectName, String projectCode, String projectCity, String projectId, String projectDesc, int projectPrice, int projectReturn) {
         this.projectPic = projectPic;
         this.projectName = projectName;
-        this.projectCorp = projectCorp;
+        this.projectCode = projectCode;
         this.projectCity = projectCity;
         this.projectId = projectId;
-        this.projectForm = projectForm;
+        this.projectDesc = projectDesc;
         this.projectPrice = projectPrice;
+        this.projectReturn = projectReturn;
     }
 
-    public String getProjectCode() {
-        return projectCode;
+    protected ProjectModel(Parcel in) {
+        projectPic = in.readString();
+        projectName = in.readString();
+        projectCode = in.readString();
+        projectCity = in.readString();
+        projectId = in.readString();
+        projectDesc = in.readString();
+        projectPrice = in.readInt();
+        projectReturn = in.readInt();
     }
 
-    public void setProjectCode(String projectCode) {
-        this.projectCode = projectCode;
-    }
+    public static final Creator<ProjectModel> CREATOR = new Creator<ProjectModel>() {
+        @Override
+        public ProjectModel createFromParcel(Parcel in) {
+            return new ProjectModel(in);
+        }
+
+        @Override
+        public ProjectModel[] newArray(int size) {
+            return new ProjectModel[size];
+        }
+    };
 
     public String getProjectPic() {
         return projectPic;
@@ -42,12 +63,12 @@ public class ProjectModel {
         this.projectName = projectName;
     }
 
-    public String getProjectCorp() {
-        return projectCorp;
+    public String getProjectCode() {
+        return projectCode;
     }
 
-    public void setProjectCorp(String projectCorp) {
-        this.projectCorp = projectCorp;
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
     }
 
     public String getProjectCity() {
@@ -66,12 +87,12 @@ public class ProjectModel {
         this.projectId = projectId;
     }
 
-    public String getProjectForm() {
-        return projectForm;
+    public String getProjectDesc() {
+        return projectDesc;
     }
 
-    public void setProjectForm(String projectForm) {
-        this.projectForm = projectForm;
+    public void setProjectDesc(String projectDesc) {
+        this.projectDesc = projectDesc;
     }
 
     public int getProjectPrice() {
@@ -80,5 +101,44 @@ public class ProjectModel {
 
     public void setProjectPrice(int projectPrice) {
         this.projectPrice = projectPrice;
+    }
+
+    public int getProjectReturn() {
+        return projectReturn;
+    }
+
+    public void setProjectReturn(int projectReturn) {
+        this.projectReturn = projectReturn;
+    }
+
+    public Map<String, Object> addProject() {
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("projectPic", projectPic);
+        result.put("projectName", projectName);
+        result.put("projectCode", projectCode);
+        result.put("projectCity", projectCity);
+        result.put("projectId", projectId);
+        result.put("projectDesc", projectDesc);
+        result.put("projectPrice", projectPrice);
+        result.put("projectReturn", projectReturn);
+        return result;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(projectPic);
+        dest.writeString(projectName);
+        dest.writeString(projectCode);
+        dest.writeString(projectCity);
+        dest.writeString(projectId);
+        dest.writeString(projectDesc);
+        dest.writeInt(projectPrice);
+        dest.writeInt(projectReturn);
     }
 }

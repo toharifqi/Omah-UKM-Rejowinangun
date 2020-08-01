@@ -68,6 +68,20 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/product_city"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Asal Kota">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_baseline_location_on_orange"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/product_name"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -81,22 +95,7 @@
                         android:inputType="text"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/product_desc"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint=" Deskripsi">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:lines="8"
-                        android:minLines="4"
-                        android:drawableStart="@drawable/ic_baseline_description_24"
-                        android:inputType="textMultiLine"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/product_cat"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -139,7 +138,22 @@
                         android:inputType="number"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/product_desc"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint=" Deskripsi Produk">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="8"
+                        android:minLines="4"
+                        android:drawableStart="@drawable/ic_baseline_description_24"
+                        android:inputType="textMultiLine"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
 

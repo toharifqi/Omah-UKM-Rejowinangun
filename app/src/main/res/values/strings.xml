@@ -2,4 +2,16 @@
     <string name="app_name">UKMQ</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lipsum_paragraph"> Untuk
+memenuhi kebutuhan
+permintaan yang semakin
+meningkat dan perkembangan
+zaman serta mempertahankan loyal
+customer maka kami akan
+melakukan diversifikasi produk yaitu
+pembuatan masker batik massal
+dengan margin keuntungan Rp 3 000
+per produk dan dengan jumlah rata
+rata penjualan yang diekspektasikan
+yaitu 3000 pcs per hari </string>
 </resources>

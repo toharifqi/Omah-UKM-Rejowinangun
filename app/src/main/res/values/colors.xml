@@ -12,4 +12,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorGreyShimmer">#569C9C9C</color>
     <color name="colorGold">#FFC000</color>
+    <color name="colorBlack">#000000</color>
+    <color name="yellowPale">#F6F3C2</color>
+    <color name="colorGreen">#33CC33</color>
 </resources>

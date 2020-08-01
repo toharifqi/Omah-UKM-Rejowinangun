@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.nio.file.attribute.GroupPrincipal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -87,7 +88,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         //firebase initialization
         fAuth = FirebaseAuth.getInstance();
-        userDb = FirebaseDatabase.getInstance().getReference("users").child(fAuth.getUid());
         carouselDb = FirebaseDatabase.getInstance().getReference("homeCarousel");
 
         @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("k");
@@ -100,43 +100,45 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         View headerView = navigationView.getHeaderView(0);
         TextView userEmail = headerView.findViewById(R.id.user_email);
         final TextView userNameD = headerView.findViewById(R.id.user_name);
-        userEmail.setText(fAuth.getCurrentUser().getEmail());
-
-        userDb.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String userName = dataSnapshot.child("userName").getValue().toString();
-                userNameD.setText(userName);
-                tipeUser = dataSnapshot.child("tipe_user").getValue().toString();
-                if (greeting > 0 && greeting <= 11) {
-                    txtGreeting.setText("Selamat Pagi, " + userName);
-                } else if (greeting > 11 && greeting <= 15) {
-                    txtGreeting.setText("Selamat Siang, " + userName);
-                } else if (greeting > 15 && greeting <= 19) {
-                    txtGreeting.setText("Selamat Sore, " + userName);
-                } else if (greeting > 19 && greeting <= 24) {
-                    txtGreeting.setText("Selamat Malam, " + userName);
-                } else {
-                    txtGreeting.setText("gagal_memuat_data");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        //fab
         final FloatingActionButton fab = findViewById(R.id.fab);
+
+        if (fAuth.getCurrentUser()!=null){
+            userDb = FirebaseDatabase.getInstance().getReference("users").child(fAuth.getUid());
+            userEmail.setText(fAuth.getCurrentUser().getEmail());
+            userDb.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String userName = dataSnapshot.child("userName").getValue().toString();
+                    userNameD.setText(userName);
+                    tipeUser = dataSnapshot.child("tipe_user").getValue().toString();
+                    if (greeting > 0 && greeting <= 11) {
+                        txtGreeting.setText("Selamat Pagi, " + userName);
+                    } else if (greeting > 11 && greeting <= 15) {
+                        txtGreeting.setText("Selamat Siang, " + userName);
+                    } else if (greeting > 15 && greeting <= 19) {
+                        txtGreeting.setText("Selamat Sore, " + userName);
+                    } else if (greeting > 19 && greeting <= 24) {
+                        txtGreeting.setText("Selamat Malam, " + userName);
+                    } else {
+                        txtGreeting.setText("gagal_memuat_data");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }else {
+            userNameD.setVisibility(View.GONE);
+            userEmail.setVisibility(View.GONE);
+            fab.setVisibility(View.GONE);
+        }
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (tipeUser.equals("1")){
-                    startActivity(new Intent(HomeActivity.this, AddProduct.class));
-                }else{
-                    startActivity(new Intent(HomeActivity.this, AddProject.class));
-                }
+                startActivity(new Intent(HomeActivity.this, AddProduct.class));
             }
         });
 
@@ -187,7 +189,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         navigationDrawer();
     }
-
 
     private void navigationDrawer() {
         navigationView.bringToFront();
