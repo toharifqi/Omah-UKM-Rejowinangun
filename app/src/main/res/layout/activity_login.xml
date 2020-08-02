@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +18,7 @@
             android:transitionName="header_bg_animate"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:background="@drawable/half_background"/>
         <LinearLayout
             android:id="@+id/header_linearlayout"
@@ -57,7 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:transitionName="slogan_animate"
-                android:text="Ini isi apa gitu slogannya"
+                android:textColor="@color/white"
+                android:text="Smart Management System for SME's"
                 android:textStyle="italic"
                 android:layout_marginTop="-5dp"/>
 
@@ -133,7 +135,7 @@
     </LinearLayout>
     <Button
         android:layout_marginHorizontal="18dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:textStyle="bold"
         android:textAllCaps="false"
         android:layout_width="match_parent"

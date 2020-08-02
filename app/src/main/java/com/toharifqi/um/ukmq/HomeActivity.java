@@ -9,12 +9,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -28,6 +33,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.nio.file.attribute.GroupPrincipal;
 import java.text.DateFormat;
@@ -57,6 +64,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     static final float END_SCALE =  0.7f;
 
     ImageSlider imageSlider, contentSlider;
+    FloatingActionButton fab, fabProduct, fabProject;
+    TextView textProduct, textProject;
+    private boolean isFabOpen;
+    private Animation fabOpenAnim, fabCloseAnim;
 
 
     @Override
@@ -99,8 +110,20 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigation_view);
         View headerView = navigationView.getHeaderView(0);
         TextView userEmail = headerView.findViewById(R.id.user_email);
+        final TextView authCond = findViewById(R.id.auth_condition);
         final TextView userNameD = headerView.findViewById(R.id.user_name);
-        final FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
+        fabProduct = findViewById(R.id.fab_product);
+        fabProject = findViewById(R.id.fab_project);
+        textProduct = findViewById(R.id.product_text);
+        textProject = findViewById(R.id.project_text);
+        isFabOpen = false;
+
+        //fab animation
+        fabOpenAnim = AnimationUtils.loadAnimation(HomeActivity.this, R.anim.fab_open);
+        fabCloseAnim = AnimationUtils.loadAnimation(HomeActivity.this, R.anim.fab_close);
+
+
 
         if (fAuth.getCurrentUser()!=null){
             userDb = FirebaseDatabase.getInstance().getReference("users").child(fAuth.getUid());
@@ -122,6 +145,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     } else {
                         txtGreeting.setText("gagal_memuat_data");
                     }
+                    if (tipeUser.equals("1")){
+                        authCond.setText("Anda masuk sebagai UKM");
+                    }else {
+                        authCond.setText("Anda masuk sebagai Investor");
+                        fab.setVisibility(View.GONE);
+                    }
+
                 }
 
                 @Override
@@ -130,15 +160,55 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
         }else {
+            if (greeting > 0 && greeting <= 11) {
+                txtGreeting.setText("Selamat Pagi!");
+            } else if (greeting > 11 && greeting <= 15) {
+                txtGreeting.setText("Selamat Siang!");
+            } else if (greeting > 15 && greeting <= 19) {
+                txtGreeting.setText("Selamat Sore!");
+            } else if (greeting > 19 && greeting <= 24) {
+                txtGreeting.setText("Selamat Malam!");
+            } else {
+                txtGreeting.setText("gagal_memuat_data");
+            }
             userNameD.setVisibility(View.GONE);
             userEmail.setVisibility(View.GONE);
             fab.setVisibility(View.GONE);
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.loggedout_menu);
         }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (isFabOpen){
+                    fabProject.startAnimation(fabCloseAnim);
+                    fabProduct.startAnimation(fabCloseAnim);
+                    textProduct.setVisibility(View.INVISIBLE);
+                    textProject.setVisibility(View.INVISIBLE);
+                    isFabOpen = false;
+                }else {
+                    fabProject.startAnimation(fabOpenAnim);
+                    fabProduct.startAnimation(fabOpenAnim);
+                    textProduct.setVisibility(View.VISIBLE);
+                    textProject.setVisibility(View.VISIBLE);
+
+                    isFabOpen = true;
+                }
+            }
+        });
+
+        fabProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, AddProduct.class));
+            }
+        });
+
+        fabProject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, AddProject.class));
             }
         });
 
@@ -250,9 +320,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 break;
+            case R.id.nav_category:
+                navigationView.getMenu().clear();
+                navigationView.inflateMenu(R.menu.menu_cat);
+                break;
+            case R.id.nav_back:
+                navigationView.getMenu().clear();
+                if (fAuth.getCurrentUser()!=null){
+                    navigationView.inflateMenu(R.menu.main_menu);
+                }else{
+                    navigationView.inflateMenu(R.menu.main_menu);
+                }
+                break;
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START);
+//        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void loginFirst(View view){
+        fAuth.signOut();
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 }

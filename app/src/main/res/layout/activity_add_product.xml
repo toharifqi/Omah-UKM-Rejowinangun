@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
+        android:background="@color/white"
         android:orientation="vertical"
         tools:context=".AddProduct">
         <androidx.appcompat.widget.Toolbar
@@ -201,7 +201,7 @@
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
         android:layout_gravity="end"
-        android:background="@color/colorWhite"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="100dp">
@@ -217,7 +217,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

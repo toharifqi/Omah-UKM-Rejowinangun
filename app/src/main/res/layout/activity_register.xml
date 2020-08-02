@@ -18,7 +18,7 @@
             android:orientation="vertical"
             android:layout_marginTop="-100dp"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:background="@drawable/half_background"/>
         <LinearLayout
             android:id="@+id/header_linearlayout"
@@ -58,7 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:transitionName="slogan_animate"
-                android:text="Ini isi apa gitu slogannya"
+                android:textColor="@color/white"
+                android:text="Smart Management System for SME'S"
                 android:textStyle="italic"
                 android:layout_marginTop="-5dp"/>
 

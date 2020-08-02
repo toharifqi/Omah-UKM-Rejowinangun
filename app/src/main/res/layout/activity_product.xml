@@ -11,13 +11,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:adjustViewBounds="false"
-        android:background="@color/colorWhite"
+        android:background="@color/white"
         android:layout_margin="18dp"
         android:cropToPadding="false"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_baseline_arrow_back_orange"
         app:tint="@null"
-        app:backgroundTint="@color/colorWhite"
+        app:backgroundTint="@color/white"
         app:fabSize="normal" />
     <RelativeLayout
         android:layout_width="match_parent"

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:title="Kategori 1" />
+        <item
+            android:title="Kategori 2" />
+        <item
+            android:id="@+id/nav_back"
+            android:title="Home"
+            android:icon="@drawable/ic_baseline_keyboard_backspace"/>
+
+    </group>
+</menu>

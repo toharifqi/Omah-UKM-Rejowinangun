@@ -23,8 +23,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="UKM"
             android:layout_marginBottom="-10dp"
+            android:text="UKM"
             android:textColor="@color/white"
             android:textSize="48sp"
             android:textStyle="bold" />
@@ -44,9 +44,11 @@
         android:id="@+id/slogan_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:transitionName="slogan_animate"
-        android:text="Ini isi apa gitu slogannya"
         android:textStyle="italic"
+        android:transitionName="slogan_animate"
+        android:textColor="@color/white"
+        android:text="Smart Management System for SME's"
+        app:layout_constraintEnd_toEndOf="@+id/main_logo"
         app:layout_constraintStart_toStartOf="@+id/main_logo"
         app:layout_constraintTop_toBottomOf="@+id/main_logo" />
 
