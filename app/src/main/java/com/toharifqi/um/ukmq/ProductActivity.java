@@ -58,8 +58,11 @@ public class ProductActivity extends AppCompatActivity {
         productDesc.setText(productModel.getProductDesc());
         productCity.setText(productModel.getProductCity());
 
+    }
 
-
-
+    public void toCheckOut(View view){
+        Intent intent = new Intent(ProductActivity.this, CheckInvestActivity.class);
+        intent.putExtra(Config.CHECKOUT_NAME, productModel.getProductName());
+        startActivity(intent);
     }
 }

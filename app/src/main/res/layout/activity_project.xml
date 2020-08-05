@@ -71,7 +71,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/product_corp"
+                            android:id="@+id/project_corp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Deni Corp"
@@ -79,7 +79,7 @@
                             android:textSize="30sp" />
 
                         <TextView
-                            android:id="@+id/product_city"
+                            android:id="@+id/project_city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pacitan city"
@@ -407,6 +407,7 @@
                         android:paddingVertical="18dp"
                         android:paddingHorizontal="28dp"
                         android:gravity="center"
+                        android:onClick="toCheckOut"
                         android:layout_marginTop="8dp"
                         android:textSize="18sp"
                         android:drawableLeft="@drawable/ic_payments_white"

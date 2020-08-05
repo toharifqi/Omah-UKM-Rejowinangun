@@ -13,8 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.toharifqi.um.ukmq.ProductActivity;
 import com.toharifqi.um.ukmq.ProjectActivity;
 import com.toharifqi.um.ukmq.R;
+import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.model.ProjectModel;
 
 import java.text.NumberFormat;
@@ -70,11 +72,15 @@ public class ProjectAdapter extends PagerAdapter {
         String price = NumberFormat.getNumberInstance(Locale.GERMAN).format(projectList.get(position).getProjectPrice());
         projectPrice.setText("Rp. " + price);
 
+        final ProjectModel project = projectList.get(position);
+
         investButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //do something here dude
-                context.startActivity(new Intent(context, ProjectActivity.class));
+                Intent intent = new Intent(context, ProjectActivity.class);
+                intent.putExtra(Config.PROJECT_MODEL, project);
+                context.startActivity(intent);
             }
         });
 

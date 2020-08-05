@@ -1,9 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CheckInvestActivity">
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".CheckInvestActivity">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Light">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:textAlignment="center">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Konfirmasi Pembayaran"
+                    android:textAlignment="textStart"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/toolbar_dropshadow" />
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="24.0dp"
+                android:paddingStart="24.0dp"
+                android:paddingRight="24.0dp"
+                android:paddingEnd="24.0dp"
+                android:paddingBottom="100dip"
+                android:background="#F1F4F9">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    app:cardCornerRadius="4dp"
+                    app:cardUseCompatPadding="true"
+                    android:elevation="8dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="18dp"
+                        android:background="@color/white">
+                        <TextView
+                            android:id="@+id/invest_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Access Control List For Cisco CNAA"
+                            android:textSize="20sp"
+                            android:textColor="@color/colorBlack"
+                            android:layout_marginBottom="20dp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO INVOICE"
+                            android:textSize="16dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="INV-8E0ZCHJG"
+                            android:textAllCaps="true"
+                            android:textSize="20sp"/>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="4dp"
+                            android:layout_marginVertical="16dp"
+                            android:elevation="8dp">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="8dp"
+                                android:background="#D5F0EE"
+                                android:orientation="vertical"
+                                android:gravity="center">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Kami telah mengirimkan tagihan pembayaran ke email Anda, lakukan pembayaran sebelum"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rabu, 24 Juni 2020 pukul 21:05"
+                                    android:layout_marginVertical="18dp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/colorBlack"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Jumlah yang harus dibayar"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorBlack"
+                                    android:text="Rp. 1.000.000"
+                                    android:textSize="22sp"/>
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kirim ke"/>
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="30dp"
+                            android:layout_marginVertical="8dp"
+                            android:src="@drawable/bri_ic" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No. Rekenik BRI Virtual Account"
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold"
+                            android:textSize="20sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2558800100041512"
+                            android:layout_marginVertical="8dp"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="20sp"/>
+                        <TextView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Untuk memudahkan transaksi, disarankan menggunakan rekening bank BRI"
+                            android:textColor="#2CB3AC"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    app:cardCornerRadius="4dp"
+                    app:cardUseCompatPadding="true"
+                    android:elevation="8dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="18dp"
+                        android:background="@color/white">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bukti Pembayaran"
+                            android:textSize="20sp"
+                            android:layout_marginBottom="20dp"
+                            android:gravity="center"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Upload bukti pembayaran disini jika Anda telah menyelesaikan pembayaran"
+                            android:textColor="#2CB3AC"/>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/check1"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Pilih Bank Asal">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/check2"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Nama Pemilik Rekening">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/check3"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Nomor Rekening">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/check4"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Nominal Transaksi">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="text"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <TextView
+                            android:layout_marginTop="15dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Unggah Foto Bukti Transaksi"
+                            android:textSize="16sp"/>
+                        <ImageView
+                            android:background="@color/colorGreyLight"
+                            android:padding="2dp"
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/product_image"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/upload_picture"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"/>
+
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:rotation="180"
+        android:background="@drawable/toolbar_dropshadow" />
+
+    <LinearLayout
+        android:baselineAligned="false"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btnSignInWrapper"
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:layout_gravity="end"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <Button
+            android:id="@+id/checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="10dp"
+            android:text="KIRIM"
+            android:letterSpacing="0.1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>
