@@ -410,7 +410,7 @@
                         android:onClick="toCheckOut"
                         android:layout_marginTop="8dp"
                         android:textSize="18sp"
-                        android:drawableLeft="@drawable/ic_payments_white"
+
                         android:text="Invest" />
                 </LinearLayout>
             </LinearLayout>
