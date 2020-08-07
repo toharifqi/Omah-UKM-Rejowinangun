@@ -200,7 +200,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void writeNewUser(String uid, int userType, String userName, String email) {
-        UserModel user = new UserModel(userName, email, null, null, null, null, null, userType);
+        UserModel user = new UserModel(userName, email, "", "", "", "", "", "", "", "", "", "", "", "", userType);
         userRef.child("users").child(uid).setValue(user);
     }
 

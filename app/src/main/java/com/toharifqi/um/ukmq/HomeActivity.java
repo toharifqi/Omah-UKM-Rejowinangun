@@ -332,6 +332,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     navigationView.inflateMenu(R.menu.main_menu);
                 }
                 break;
+            case R.id.nav_user_profile:
+                if (fAuth.getCurrentUser()!=null){
+                    startActivity(new Intent(HomeActivity.this, ProfilActivity.class));
+                }else{
+                    startActivity(new Intent(this, LoginActivity.class));
+                }
+                break;
         }
 
 //        drawerLayout.closeDrawer(GravityCompat.START);

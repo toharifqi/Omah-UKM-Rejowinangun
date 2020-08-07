@@ -9,4 +9,18 @@ public class Config {
     public final static String BOOK_ADD_SUCCESS_MSG="Produk berhasil ditambahkan!";
     public final static String PRODUCT_MODEL="productModelParcelable";
     public final static String PROJECT_MODEL="projectModelParcelable";
+
+    public final static String NAMA_USER_USAHA ="userName";
+    public final static String KODE_PU ="kodePu";
+    public final static String NAMA_PEMILIK ="namaPemilik";
+    public final static String NAMA_MERK ="namaMerk";
+    public final static String NO_TELEPON ="noTelepon";
+    public final static String IZIN_PIRT ="izinPirt";
+    public final static String IZIN_BPOM ="izinBpom";
+    public final static String IZIN_HALAL ="izinHalal";
+    public final static String IZIN_SNI ="izinSni";
+    public final static String JALAN ="profilJalan";
+    public final static String RT_RW ="profilRt";
+    public final static String KECAMATAN ="profilKecamatan";
+    public final static String KABUPATEN ="profilKabupaten";
 }

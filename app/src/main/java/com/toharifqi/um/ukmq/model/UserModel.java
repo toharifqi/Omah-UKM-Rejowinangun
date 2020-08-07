@@ -1,21 +1,28 @@
 package com.toharifqi.um.ukmq.model;
 
 public class UserModel {
-    String userName, email, no_telp, jalan_desa, rt_rw, kecamatan, kab_kota;
+    String userName, email, kodePu, namaPemilik, namaMerk, noTelp, izinPirt,
+    izinBpom, izinHalal, izinSni, profilJalan, profilRt, profilKecamatan, profilKabupaten;
     int tipe_user;
 
     public UserModel() {
     }
 
-
-    public UserModel(String userName, String email, String no_telp, String jalan_desa, String rt_rw, String kecamatan, String kab_kota, int tipe_user) {
+    public UserModel(String userName, String email, String kodePu, String namaPemilik, String namaMerk, String noTelp, String izinPirt, String izinBpom, String izinHalal, String izinSni, String profilJalan, String profilRt, String profilKecamatan, String profilKabupaten, int tipe_user) {
         this.userName = userName;
         this.email = email;
-        this.no_telp = no_telp;
-        this.jalan_desa = jalan_desa;
-        this.rt_rw = rt_rw;
-        this.kecamatan = kecamatan;
-        this.kab_kota = kab_kota;
+        this.kodePu = kodePu;
+        this.namaPemilik = namaPemilik;
+        this.namaMerk = namaMerk;
+        this.noTelp = noTelp;
+        this.izinPirt = izinPirt;
+        this.izinBpom = izinBpom;
+        this.izinHalal = izinHalal;
+        this.izinSni = izinSni;
+        this.profilJalan = profilJalan;
+        this.profilRt = profilRt;
+        this.profilKecamatan = profilKecamatan;
+        this.profilKabupaten = profilKabupaten;
         this.tipe_user = tipe_user;
     }
 
@@ -35,44 +42,100 @@ public class UserModel {
         this.email = email;
     }
 
-    public String getNo_telp() {
-        return no_telp;
+    public String getKodePu() {
+        return kodePu;
     }
 
-    public void setNo_telp(String no_telp) {
-        this.no_telp = no_telp;
+    public void setKodePu(String kodePu) {
+        this.kodePu = kodePu;
     }
 
-    public String getJalan_desa() {
-        return jalan_desa;
+    public String getNamaPemilik() {
+        return namaPemilik;
     }
 
-    public void setJalan_desa(String jalan_desa) {
-        this.jalan_desa = jalan_desa;
+    public void setNamaPemilik(String namaPemilik) {
+        this.namaPemilik = namaPemilik;
     }
 
-    public String getRt_rw() {
-        return rt_rw;
+    public String getNamaMerk() {
+        return namaMerk;
     }
 
-    public void setRt_rw(String rt_rw) {
-        this.rt_rw = rt_rw;
+    public void setNamaMerk(String namaMerk) {
+        this.namaMerk = namaMerk;
     }
 
-    public String getKecamatan() {
-        return kecamatan;
+    public String getNoTelp() {
+        return noTelp;
     }
 
-    public void setKecamatan(String kecamatan) {
-        this.kecamatan = kecamatan;
+    public void setNoTelp(String noTelp) {
+        this.noTelp = noTelp;
     }
 
-    public String getKab_kota() {
-        return kab_kota;
+    public String getIzinPirt() {
+        return izinPirt;
     }
 
-    public void setKab_kota(String kab_kota) {
-        this.kab_kota = kab_kota;
+    public void setIzinPirt(String izinPirt) {
+        this.izinPirt = izinPirt;
+    }
+
+    public String getIzinBpom() {
+        return izinBpom;
+    }
+
+    public void setIzinBpom(String izinBpom) {
+        this.izinBpom = izinBpom;
+    }
+
+    public String getIzinHalal() {
+        return izinHalal;
+    }
+
+    public void setIzinHalal(String izinHalal) {
+        this.izinHalal = izinHalal;
+    }
+
+    public String getIzinSni() {
+        return izinSni;
+    }
+
+    public void setIzinSni(String izinSni) {
+        this.izinSni = izinSni;
+    }
+
+    public String getProfilJalan() {
+        return profilJalan;
+    }
+
+    public void setProfilJalan(String profilJalan) {
+        this.profilJalan = profilJalan;
+    }
+
+    public String getProfilRt() {
+        return profilRt;
+    }
+
+    public void setProfilRt(String profilRt) {
+        this.profilRt = profilRt;
+    }
+
+    public String getProfilKecamatan() {
+        return profilKecamatan;
+    }
+
+    public void setProfilKecamatan(String profilKecamatan) {
+        this.profilKecamatan = profilKecamatan;
+    }
+
+    public String getProfilKabupaten() {
+        return profilKabupaten;
+    }
+
+    public void setProfilKabupaten(String profilKabupaten) {
+        this.profilKabupaten = profilKabupaten;
     }
 
     public int getTipe_user() {
