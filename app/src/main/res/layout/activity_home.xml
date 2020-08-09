@@ -195,11 +195,11 @@
                                 app:srcCompat="@drawable/ic_baseline_search_24" />
 
                             <ImageView
+                                android:id="@+id/profile_login"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginRight="10dp"
-                                android:onClick="loginFirst"
                                 android:padding="8dp"
                                 app:srcCompat="@drawable/ic_login_white_24dp" />
 

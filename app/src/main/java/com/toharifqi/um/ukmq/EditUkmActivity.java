@@ -22,7 +22,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -31,10 +30,6 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.model.ProductModel;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 import es.dmoral.toasty.Toasty;
 
@@ -248,7 +243,7 @@ public class EditUkmActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==Config.PHOTO_REQUEST_CODE && resultCode==RESULT_OK && data!=null){
+        if (requestCode== Config.PHOTO_REQUEST_CODE && resultCode==RESULT_OK && data!=null){
             profilPicUri=data.getData();
             profilPic.setImageURI(profilPicUri);
         }

@@ -27,4 +27,11 @@ public class Config {
     public final static String KECAMATAN ="profilKecamatan";
     public final static String KABUPATEN ="profilKabupaten";
     public final static String PROFIL_PIC ="profilPicture";
+
+    //user data
+    public static String userNamaUsaha;
+    public static String userJalan;
+    public static String userKabupaten;
+    public static String userKecamatan;
+    public static String userNamaPemilik;
 }

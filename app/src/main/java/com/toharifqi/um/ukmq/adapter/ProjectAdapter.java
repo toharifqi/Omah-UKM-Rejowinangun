@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
-import com.toharifqi.um.ukmq.ProductActivity;
 import com.toharifqi.um.ukmq.ProjectActivity;
 import com.toharifqi.um.ukmq.R;
 import com.toharifqi.um.ukmq.helpers.Config;

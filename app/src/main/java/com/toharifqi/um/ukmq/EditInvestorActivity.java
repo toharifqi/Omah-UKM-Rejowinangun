@@ -194,7 +194,7 @@ public class EditInvestorActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==Config.PHOTO_REQUEST_CODE && resultCode==RESULT_OK && data!=null){
+        if (requestCode== Config.PHOTO_REQUEST_CODE && resultCode==RESULT_OK && data!=null){
             profilPicUri=data.getData();
             profilPic.setImageURI(profilPicUri);
         }

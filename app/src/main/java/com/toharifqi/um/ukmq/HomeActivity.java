@@ -9,9 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,7 +17,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -28,6 +25,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,9 +33,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.toharifqi.um.ukmq.helpers.Config;
 
-import org.w3c.dom.Text;
-
-import java.nio.file.attribute.GroupPrincipal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,6 +55,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     //Drawer menu
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    ImageView personLogin;
 
     //constant
     static final float END_SCALE =  0.7f;
@@ -119,6 +115,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         textProduct = findViewById(R.id.product_text);
         textProject = findViewById(R.id.project_text);
         isFabOpen = false;
+        personLogin = findViewById(R.id.profile_login);
 
         //fab animation
         fabOpenAnim = AnimationUtils.loadAnimation(HomeActivity.this, R.anim.fab_open);
@@ -127,11 +124,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
         if (fAuth.getCurrentUser()!=null){
+            personLogin.setImageResource(R.drawable.ic_baseline_person_24);
+            personLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(HomeActivity.this, ProfilActivity.class));
+                }
+            });
             userDb = FirebaseDatabase.getInstance().getReference("users").child(fAuth.getUid());
             userEmail.setText(fAuth.getCurrentUser().getEmail());
             userDb.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    //add user data to Config
+                    Config.userJalan = dataSnapshot.child("profilJalan").getValue().toString();
+                    Config.userKabupaten = dataSnapshot.child("profilKabupaten").getValue().toString();
+                    Config.userKecamatan = dataSnapshot.child("profilKecamatan").getValue().toString();
+                    Config.userNamaUsaha = dataSnapshot.child("namaUsaha").getValue().toString();
+                    Config.userNamaPemilik = dataSnapshot.child("namaPemilik").getValue().toString();
+
                     String userName = dataSnapshot.child("userName").getValue().toString();
                     userNameD.setText(userName);
                     tipeUser = dataSnapshot.child("tipe_user").getValue().toString();
@@ -163,6 +174,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
         }else {
+            personLogin.setImageResource(R.drawable.ic_login_white_24dp);
+            personLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fAuth.signOut();
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                    finish();
+                }
+            });
             if (greeting > 0 && greeting <= 11) {
                 txtGreeting.setText("Selamat Pagi!");
             } else if (greeting > 11 && greeting <= 15) {
@@ -266,7 +286,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void navigationDrawer() {
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_home);
 
         menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -314,9 +333,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
         switch (menuItem.getItemId()){
-            case R.id.nav_home:
+            case R.id.nav_penawaran_projek:
+                startActivity(new Intent(HomeActivity.this, AllProjectActivity.class));
                 break;
             case R.id.nav_log_out:
                 fAuth.signOut();
@@ -346,12 +365,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 //        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void loginFirst(View view){
-        fAuth.signOut();
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
     }
 
     public void toAllProduct(View view){

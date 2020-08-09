@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,8 +12,6 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.model.ProductModel;
-
-import org.w3c.dom.Text;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -47,6 +44,7 @@ public class ProductActivity extends AppCompatActivity {
         TextView productCat = findViewById(R.id.product_cat);
         TextView productDesc = findViewById(R.id.product_desc);
         TextView productCity = findViewById(R.id.product_city);
+        TextView productCorp = findViewById(R.id.product_corp);
 
         String price = NumberFormat.getNumberInstance(Locale.GERMAN).format(productModel.getProductPrice());
 
@@ -57,6 +55,7 @@ public class ProductActivity extends AppCompatActivity {
         productCat.setText("Kategori: " + productModel.getProductCat());
         productDesc.setText(productModel.getProductDesc());
         productCity.setText(productModel.getProductCity());
+        productCorp.setText(productModel.getProductCode());
 
     }
 

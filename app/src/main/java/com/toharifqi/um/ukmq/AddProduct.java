@@ -21,6 +21,8 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -45,7 +47,7 @@ public class AddProduct extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private StorageReference storageReference;
 
-    TextInputLayout txtProductCode, txtProductName, txtProductDesc, txtProductCat, txtProductPrice, txtProductStock, txtProductCity;
+    TextInputLayout txtProductName, txtProductDesc, txtProductCat, txtProductPrice, txtProductStock;
 
     private ImageView productPic;
     private Uri productPicUri;
@@ -65,13 +67,11 @@ public class AddProduct extends AppCompatActivity {
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-        txtProductCode = findViewById(R.id.product_code);
         txtProductName = findViewById(R.id.product_name);
         txtProductDesc = findViewById(R.id.product_desc);
         txtProductCat = findViewById(R.id.product_cat);
         txtProductPrice = findViewById(R.id.product_price);
         txtProductStock = findViewById(R.id.product_stock);
-        txtProductCity = findViewById(R.id.product_city);
 
         productPic = findViewById(R.id.product_image);
         productPic.setOnClickListener(new View.OnClickListener() {
@@ -109,23 +109,15 @@ public class AddProduct extends AppCompatActivity {
         dialog = ProgressDialog.show(AddProduct.this, "",
                 "Menambahkan data produk baru. Mohon tunggu ...", true);
 
-        final String productCode = txtProductCode.getEditText().getText().toString();
         final String productName = txtProductName.getEditText().getText().toString();
         final String productDesc = txtProductDesc.getEditText().getText().toString();
         final String productCat = txtProductCat.getEditText().getText().toString();
-        final String productCity = txtProductCity.getEditText().getText().toString();
         final int productPrice =  Integer.parseInt(txtProductPrice.getEditText().getText().toString());
         final int productStock = Integer.parseInt(txtProductStock.getEditText().getText().toString());
 
         boolean isNullPhotoUrl = productPicUri == null;
 
-        if (productCode.isEmpty()){
-            showDialogNoInput();
-            txtProductCode.setError(REQUIRED);
-        }else if (productCity.isEmpty()){
-            showDialogNoInput();
-            txtProductCity.setError(REQUIRED);
-        }else if (productName.isEmpty()){
+        if (productName.isEmpty()){
             showDialogNoInput();
             txtProductName.setError(REQUIRED);
         }else if (productCat.isEmpty()){
@@ -148,7 +140,7 @@ public class AddProduct extends AppCompatActivity {
         }
 
         if (!isNullPhotoUrl){
-            writeNewPost(productCode, productName, productDesc, productCat, productCity, productPrice, productStock, productPicUri);
+            writeNewPost(productName, productDesc, productCat, productPrice, productStock, productPicUri);
             setEditingEnabled(true);
         }
 
@@ -156,11 +148,11 @@ public class AddProduct extends AppCompatActivity {
 
     }
 
-    private void writeNewPost(final String productCode, final String productName, final String productDesc, final String productCat, final String productCity,
+    private void writeNewPost(final String productName, final String productDesc, final String productCat,
                               final int productPrice, final int productStock, Uri productPicUri) {
 
         String charRandom = generateString();
-        String productCodeNospaces = productCode.replace(" ", "");
+        String productCodeNospaces = productName.replace(" ", "");
         final String productId = productCodeNospaces.concat("-" + charRandom);
 
         final String uniqueKey = mDatabaseReference.push().getKey();
@@ -181,8 +173,9 @@ public class AddProduct extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Uri downloadURi=task.getResult();
 
-                    ProductModel product = new ProductModel(productCode, productName,
-                            productDesc, productCat, productCity, productId,
+                    String city = Config.userKecamatan + ", " + Config.userKabupaten;
+                    ProductModel product = new ProductModel(Config.userNamaUsaha, productName,
+                            productDesc, productCat, city, productId,
                             downloadURi.toString(), productPrice, productStock);
 
                     Map<String, Object> postValues = product.addProduct();
@@ -220,7 +213,7 @@ public class AddProduct extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==Config.PHOTO_REQUEST_CODE && resultCode==RESULT_OK && data!=null){
+        if(requestCode== Config.PHOTO_REQUEST_CODE && resultCode==RESULT_OK && data!=null){
             productPicUri=data.getData();
             productPic.setImageURI(productPicUri);
         }

@@ -41,13 +41,12 @@ public class AddProject extends AppCompatActivity {
 
     Toolbar mToolbar;
 
-
     private static final String TAG = "NewProductActivity";
     private static final String REQUIRED = "Mohon masukkan data dengan benar.";
     private DatabaseReference mDatabaseReference;
     private StorageReference storageReference;
 
-    private TextInputLayout textProjectCode, textProjectCity, textProjectName, textProjectPrice, textProjectReturn, textProjectDesc;
+    private TextInputLayout textProjectName, textProjectPrice, textProjectReturn, textProjectDesc;
 
     private ImageView projectPic;
     private Uri projectPicUri;
@@ -66,8 +65,6 @@ public class AddProject extends AppCompatActivity {
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-        textProjectCode = findViewById(R.id.project_code);
-        textProjectCity = findViewById(R.id.project_city);
         textProjectName = findViewById(R.id.project_name);
         textProjectPrice = findViewById(R.id.project_price);
         textProjectReturn = findViewById(R.id.project_return);
@@ -125,8 +122,6 @@ public class AddProject extends AppCompatActivity {
         dialog = ProgressDialog.show(AddProject.this, "",
                 "Menambahkan data project baru. Mohon tunggu ...", true);
 
-        final String projectCode = textProjectCode.getEditText().getText().toString();
-        final String projectCity = textProjectCity.getEditText().getText().toString();
         final String projectName = textProjectName.getEditText().getText().toString();
         final int projectPrice = Integer.parseInt(textProjectPrice.getEditText().getText().toString());
         final int projectReturn = Integer.parseInt(textProjectReturn.getEditText().getText().toString());
@@ -134,13 +129,7 @@ public class AddProject extends AppCompatActivity {
 
         boolean isNullPhotoUrl = projectPicUri == null;
 
-        if (projectCode.isEmpty()){
-            showDialogNoInput();
-            textProjectCode.setError(REQUIRED);
-        }else if (projectCity.isEmpty()){
-            showDialogNoInput();
-            textProjectCity.setError(REQUIRED);
-        }else if (projectName.isEmpty()){
+        if (projectName.isEmpty()){
             showDialogNoInput();
             textProjectName.setError(REQUIRED);
         }else if (projectPrice == 0){
@@ -160,15 +149,15 @@ public class AddProject extends AppCompatActivity {
         }
 
         if (!isNullPhotoUrl){
-            writeNewPost(projectCode, projectCity, projectName, projectPrice, projectReturn, projectDesc, projectPicUri);
+            writeNewPost(projectName, projectPrice, projectReturn, projectDesc, projectPicUri);
             setEditingEnabled(true);
         }
     }
 
-    private void writeNewPost(final String projectCode, final String projectCity, final String projectName,
+    private void writeNewPost(final String projectName,
                               final int projectPrice, final int projectReturn, final String projectDesc, Uri projectPicUri) {
         String charRandwom = generateString();
-        String projectCodeNoSpaces = projectCode.replace(" ", "");
+        String projectCodeNoSpaces = projectName.replace(" ", "");
         final String projectId = projectCodeNoSpaces.concat("-" + charRandwom);
 
         final String uniqueKey = mDatabaseReference.push().getKey();
@@ -189,7 +178,8 @@ public class AddProject extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Uri downloadURi=task.getResult();
 
-                    ProjectModel project = new ProjectModel(downloadURi.toString(), projectName, projectCode, projectCity,
+                    String city = Config.userKecamatan + ", " + Config.userKabupaten;
+                    ProjectModel project = new ProjectModel(downloadURi.toString(), projectName, Config.userNamaUsaha, city,
                             projectId, projectDesc, projectPrice, projectReturn);
 
                     Map<String, Object> postValues = project.addProject();
@@ -227,7 +217,7 @@ public class AddProject extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==Config.PHOTO_REQUEST_CODE && resultCode==RESULT_OK && data!=null){
+        if(requestCode== Config.PHOTO_REQUEST_CODE && resultCode==RESULT_OK && data!=null){
             projectPicUri=data.getData();
             projectPic.setImageURI(projectPicUri);
         }
