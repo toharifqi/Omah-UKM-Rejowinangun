@@ -198,7 +198,7 @@ public class AddProject extends AppCompatActivity {
                     childUpdates.put("/projects/" + projectId, postValues);
 
                     mDatabaseReference.updateChildren(childUpdates);
-                    Toasty.success(getApplicationContext(), Config.BOOK_ADD_SUCCESS_MSG, Toasty.LENGTH_SHORT, true).show();
+                    Toasty.success(getApplicationContext(), Config.PROJECT_ADD_SUCCESS_MSG, Toasty.LENGTH_SHORT, true).show();
                 }
                 dialog.dismiss();
                 // Finish this Activity, back to the stream

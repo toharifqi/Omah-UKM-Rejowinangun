@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -55,7 +56,7 @@ public class ProfilActivity extends AppCompatActivity {
         txtNamaUsaha = findViewById(R.id.profil_usaha);
         txtNamaPemilik = findViewById(R.id.profil_pemilik);
         txtNamaMerk = findViewById(R.id.profil_merk);
-        txtTelepon = findViewById(R.id.text_telepon);
+        txtTelepon = findViewById(R.id.profil_telp);
         txtPIRT = findViewById(R.id.profil_pirt);
         txtBPOM = findViewById(R.id.profil_bpom);
         txtHalal = findViewById(R.id.profil_halal);
@@ -85,7 +86,7 @@ public class ProfilActivity extends AppCompatActivity {
                 String tipeUser = dataSnapshot.child("tipe_user").getValue().toString();
                 String emailUser = dataSnapshot.child("email").getValue().toString();
 
-                String namaUserUsaha = dataSnapshot.child(Config.NAMA_USER_USAHA).getValue().toString();
+                String namaUserUsaha = dataSnapshot.child(Config.NAMA_USAHA).getValue().toString();
                 String kodePu = dataSnapshot.child(Config.KODE_PU).getValue().toString();
                 String namaPemilik = dataSnapshot.child(Config.NAMA_PEMILIK).getValue().toString();
                 String namaMerk = dataSnapshot.child(Config.NAMA_MERK).getValue().toString();
@@ -98,7 +99,8 @@ public class ProfilActivity extends AppCompatActivity {
                 String rtRw = dataSnapshot.child(Config.RT_RW).getValue().toString();
                 String kecamatan = dataSnapshot.child(Config.KECAMATAN).getValue().toString();
                 String kabupaten = dataSnapshot.child(Config.KABUPATEN).getValue().toString();
-                txtUserName.setText(namaUserUsaha);
+                String profilPic = dataSnapshot.child(Config.PROFIL_PIC).getValue().toString();
+                txtUserName.setText(namaPemilik);
                 txtEmailUser.setText(emailUser);
                 if (tipeUser.equals("1")){
                     txtTipeAkun.setText("Akun UKM");
@@ -119,7 +121,7 @@ public class ProfilActivity extends AppCompatActivity {
                     txtNamaPemilik.setText(namaPemilik);
                 }
                 if (!namaMerk.isEmpty()){
-                    txtNamaPemilik.setText(namaMerk);
+                    txtNamaMerk.setText(namaMerk);
                 }
                 if (!noTelepon.isEmpty()){
                     txtTelepon.setText(noTelepon);
@@ -153,6 +155,9 @@ public class ProfilActivity extends AppCompatActivity {
                     txtKabupaten.setText(kabupaten);
                     txtInvestorKabupaten.setText(kabupaten);
                 }
+                if (!profilPic.isEmpty()){
+                    Glide.with(ProfilActivity.this).load(profilPic).into(profilPhoto);
+                }
             }
 
             @Override
@@ -163,21 +168,11 @@ public class ProfilActivity extends AppCompatActivity {
     }
 
     public void toEditProfile (View view){
-        userDb.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String tipeUser = dataSnapshot.child("tipe_user").getValue().toString();
-                if (tipeUser.equals("1")){
-                    startActivity(new Intent(ProfilActivity.this, EditUkmActivity.class));
-                }else {
-                    startActivity(new Intent(ProfilActivity.this, EditInvestorActivity.class));
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        if (Config.tipe_user.equals("1")){
+            startActivity(new Intent(ProfilActivity.this, EditUkmActivity.class));
+        }else {
+            startActivity(new Intent(ProfilActivity.this, EditInvestorActivity.class));
+        }
     }
 }

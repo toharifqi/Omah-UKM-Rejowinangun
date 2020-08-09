@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.toharifqi.um.ukmq.helpers.Config;
 
 import org.w3c.dom.Text;
 
@@ -146,8 +147,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         txtGreeting.setText("gagal_memuat_data");
                     }
                     if (tipeUser.equals("1")){
+                        Config.tipe_user = "1";
                         authCond.setText("Anda masuk sebagai UKM");
                     }else {
+                        Config.tipe_user = "2";
                         authCond.setText("Anda masuk sebagai Investor");
                         fab.setVisibility(View.GONE);
                     }
@@ -349,5 +352,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fAuth.signOut();
         startActivity(new Intent(this, LoginActivity.class));
         finish();
+    }
+
+    public void toAllProduct(View view){
+        startActivity(new Intent(HomeActivity.this, AllProductActivity.class));
+    }
+
+    public void toAllProject(View view){
+        startActivity(new Intent(HomeActivity.this, AllProjectActivity.class));
     }
 }
