@@ -11,11 +11,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
+
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -25,7 +24,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -34,6 +32,7 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.model.ProductModel;
+import com.toharifqi.um.ukmq.model.ProgressModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +40,7 @@ import java.util.Random;
 
 import es.dmoral.toasty.Toasty;
 
-public class AddProduct extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
+public class AddReport extends AppCompatActivity {
     Toolbar mToolbar;
 
     private static final String REQUIRED = "Mohon masukkan data dengan benar.";
@@ -50,51 +48,44 @@ public class AddProduct extends AppCompatActivity implements AdapterView.OnItemS
     private StorageReference storageReference;
     private FirebaseAuth fAuth;
     private String productCat;
-    private Spinner categorySpinner;
 
-    private TextInputLayout txtProductName, txtProductDesc, txtProductPrice, txtProductStock;
+    private TextInputLayout txtProgressWritter, txtProgressTitle, txtProgressDesc;
 
-    private ImageView productPic;
-    private Uri productPicUri;
+    private ImageView progressPic;
+    private Uri progressPicUri;
 
-    Button addProductBtn;
+    Button addProgressBtn;
     public ProgressDialog dialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product);
+        setContentView(R.layout.activity_add_report);
 
         // Action Bar
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.close);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-        categorySpinner = findViewById(R.id.spinner_category);
-        categorySpinner.setOnItemSelectedListener(this);
-        txtProductName = findViewById(R.id.product_name);
-        txtProductDesc = findViewById(R.id.product_desc);
-        txtProductPrice = findViewById(R.id.product_price);
-        txtProductStock = findViewById(R.id.product_stock);
+        txtProgressWritter = findViewById(R.id.progress_writter);
+        txtProgressTitle = findViewById(R.id.progress_title);
+        txtProgressDesc = findViewById(R.id.progress_desc);
 
-        productPic = findViewById(R.id.product_image);
-        productPic.setOnClickListener(new View.OnClickListener() {
+        progressPic = findViewById(R.id.progress_image);
+        progressPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 captureImage();
             }
         });
 
-        addProductBtn = findViewById(R.id.add_product);
-
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.close);
-
-        addProductBtn.setOnClickListener(new View.OnClickListener() {
+        addProgressBtn = findViewById(R.id.add_progress);
+        addProgressBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 submitPost();
@@ -104,66 +95,48 @@ public class AddProduct extends AppCompatActivity implements AdapterView.OnItemS
         fAuth = FirebaseAuth.getInstance();
     }
 
-    private void setEditingEnabled(boolean enabled) {
-        if (enabled) {
-            addProductBtn.setVisibility(View.VISIBLE);
-        } else {
-            addProductBtn.setVisibility(View.GONE);
-        }
-    }
-
     private void submitPost() {
-        dialog = ProgressDialog.show(AddProduct.this, "",
-                "Menambahkan data produk baru. Mohon tunggu ...", true);
+        dialog = ProgressDialog.show(AddReport.this, "",
+                "Menambahkan data laporan progress baru. Mohon tunggu ...", true);
 
-        final String productName = txtProductName.getEditText().getText().toString();
-        final String productDesc = txtProductDesc.getEditText().getText().toString();
-        final int productPrice =  Integer.parseInt(txtProductPrice.getEditText().getText().toString());
-        final int productStock = Integer.parseInt(txtProductStock.getEditText().getText().toString());
+        String progressWritter = txtProgressWritter.getEditText().getText().toString();
+        String progressTitle = txtProgressTitle.getEditText().getText().toString();
+        String progreesDesc = txtProgressDesc.getEditText().getText().toString();
 
-        boolean isNullPhotoUrl = productPicUri == null;
+        boolean isNullPhotoUrl = progressPicUri == null;
 
-        if (productName.isEmpty()){
+        if (progressWritter.isEmpty()){
             showDialogNoInput();
-            txtProductName.setError(REQUIRED);
-        }else if (productCat.equals("-")){
+            txtProgressWritter.setError(REQUIRED);
+        }else if (progressTitle.isEmpty()){
             showDialogNoInput();
-        }else if (productPrice == 0){
+            txtProgressTitle.setError(REQUIRED);
+        }else if (progreesDesc.isEmpty()){
             showDialogNoInput();
-            txtProductPrice.setError(REQUIRED);
-        }else if (productStock == 0){
-            showDialogNoInput();
-            txtProductStock.setError(REQUIRED);
-        }else if (productDesc.isEmpty()){
-            showDialogNoInput();
-            txtProductDesc.setError(REQUIRED);
+            txtProgressDesc.setError(REQUIRED);
         }else if(isNullPhotoUrl){
             showDialogNoInput();
             Toasty.error(getApplicationContext(), Config.IMAGE_URL_NULL_MESSAGE, Toasty.LENGTH_SHORT, true).show();
-        }else{
+        }else {
             setEditingEnabled(false);
         }
 
         if (!isNullPhotoUrl){
-            writeNewPost(productName, productDesc, productCat, productPrice, productStock, productPicUri);
+            writeNewPost(progressWritter, progressTitle, progreesDesc, progressPicUri);
             setEditingEnabled(true);
         }
-
-
-
     }
 
-    private void writeNewPost(final String productName, final String productDesc, final String productCat,
-                              final int productPrice, final int productStock, Uri productPicUri) {
-
+    private void writeNewPost(final String progressWritter, final String progressTitle,
+                              final String progreesDesc, Uri progressPicUri) {
         String charRandom = generateString();
-        String productCodeNospaces = productName.replace(" ", "");
-        final String productId = productCodeNospaces.concat("-" + charRandom);
+        String productCodeNospaces = progressTitle.replace(" ", "");
+        final String progressId = productCodeNospaces.concat("-" + charRandom);
         final String productIdUser = fAuth.getCurrentUser().getUid();
 
         final String uniqueKey = mDatabaseReference.push().getKey();
-        storageReference = FirebaseStorage.getInstance().getReference().child("product/"+uniqueKey).child(Config.STORAGE_PATH + productPicUri.getLastPathSegment());
-        StorageTask storageTask = storageReference.putFile(productPicUri);
+        storageReference = FirebaseStorage.getInstance().getReference().child("progress/"+uniqueKey).child(Config.STORAGE_PATH + progressPicUri.getLastPathSegment());
+        StorageTask storageTask = storageReference.putFile(progressPicUri);
         Task<Uri> uriTask=storageTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
 
             @Override
@@ -181,14 +154,13 @@ public class AddProduct extends AppCompatActivity implements AdapterView.OnItemS
 
 
                     String city = Config.userKecamatan + ", " + Config.userKabupaten;
-                    ProductModel product = new ProductModel(Config.userNamaUsaha, productName,
-                            productDesc, productCat, city, productIdUser,
-                            downloadURi.toString(), productPrice, productStock);
+                    ProgressModel progress = new ProgressModel(progressWritter, progressTitle,
+                            progreesDesc, downloadURi.toString(), productIdUser);
 
-                    Map<String, Object> postValues = product.addProduct();
+                    Map<String, Object> postValues = progress.addProgress();
                     Map<String, Object> childUpdates = new HashMap<>();
 
-                    childUpdates.put("/products/" + productId, postValues);
+                    childUpdates.put("/products/" + progressId, postValues);
 
                     mDatabaseReference.updateChildren(childUpdates);
                     Toasty.success(getApplicationContext(), Config.BOOK_ADD_SUCCESS_MSG, Toasty.LENGTH_SHORT, true).show();
@@ -198,7 +170,14 @@ public class AddProduct extends AppCompatActivity implements AdapterView.OnItemS
                 finish();
             }
         });
+    }
 
+    private void setEditingEnabled(boolean enabled) {
+        if (enabled) {
+            addProgressBtn.setVisibility(View.VISIBLE);
+        } else {
+            addProgressBtn.setVisibility(View.GONE);
+        }
     }
 
     private String generateString() {
@@ -220,9 +199,9 @@ public class AddProduct extends AppCompatActivity implements AdapterView.OnItemS
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode== Config.PHOTO_REQUEST_CODE && resultCode==RESULT_OK && data!=null){
-            productPicUri=data.getData();
-            productPic.setImageURI(productPicUri);
+        if (requestCode == Config.PHOTO_REQUEST_CODE && requestCode == RESULT_OK && data!=null){
+            progressPicUri = data.getData();
+            progressPic.setImageURI(progressPicUri);
         }
     }
 
@@ -246,15 +225,5 @@ public class AddProduct extends AppCompatActivity implements AdapterView.OnItemS
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        productCat = parent.getSelectedItem().toString();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }

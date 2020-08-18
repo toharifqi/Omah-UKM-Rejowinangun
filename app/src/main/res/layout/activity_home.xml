@@ -330,38 +330,39 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_product"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:adjustViewBounds="false"
         android:background="@color/white"
         android:cropToPadding="false"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_loyalty_black_24dp"
+        android:visibility="invisible"
         app:backgroundTint="@color/white"
         app:fabSize="normal"
-        app:tint="@null"/>
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_loyalty_black_24dp"
+        app:tint="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_project"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/white"
         android:clickable="true"
         android:cropToPadding="false"
         android:scaleType="centerCrop"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/fab_product"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/white"
-        app:tint="@null"
-        app:srcCompat="@drawable/ic_baseline_project" />
+        app:srcCompat="@drawable/ic_baseline_project"
+        app:tint="@null" />
+
 
     <TextView
         android:id="@+id/product_text"
@@ -377,15 +378,16 @@
         app:layout_constraintEnd_toStartOf="@+id/fab_product"
         app:layout_constraintTop_toTopOf="@+id/fab_product" />
 
+
     <TextView
         android:id="@+id/project_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:background="@drawable/text_bg"
-        android:textColor="@color/white"
         android:padding="8dp"
         android:text="Tambah Project"
+        android:textColor="@color/white"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/fab_project"
         app:layout_constraintEnd_toStartOf="@+id/fab_project"

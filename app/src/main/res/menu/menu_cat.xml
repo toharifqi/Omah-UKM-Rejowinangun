@@ -2,13 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:title="Kategori 1" />
+            android:id="@+id/cat_food"
+            android:title="Food and Baverages" />
         <item
-            android:title="Kategori 2" />
+            android:id="@+id/cat_fashion"
+            android:title="Fashion" />
         <item
             android:id="@+id/nav_back"
             android:title="Home"
             android:icon="@drawable/ic_baseline_keyboard_backspace"/>
-
     </group>
 </menu>

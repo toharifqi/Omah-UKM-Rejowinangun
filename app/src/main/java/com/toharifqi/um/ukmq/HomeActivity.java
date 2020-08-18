@@ -16,8 +16,11 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -25,7 +28,6 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -109,6 +111,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         TextView userEmail = headerView.findViewById(R.id.user_email);
         final TextView authCond = findViewById(R.id.auth_condition);
         final TextView userNameD = headerView.findViewById(R.id.user_name);
+        final ImageView profileHeader = headerView.findViewById(R.id.profile_header);
+        final LinearLayout profileOverlay = headerView.findViewById(R.id.profile_overlay);
         fab = findViewById(R.id.fab);
         fabProduct = findViewById(R.id.fab_product);
         fabProject = findViewById(R.id.fab_project);
@@ -142,9 +146,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     Config.userKecamatan = dataSnapshot.child("profilKecamatan").getValue().toString();
                     Config.userNamaUsaha = dataSnapshot.child("namaUsaha").getValue().toString();
                     Config.userNamaPemilik = dataSnapshot.child("namaPemilik").getValue().toString();
+                    String profilImageUri = dataSnapshot.child("profilPicture").getValue().toString();
 
                     String userName = dataSnapshot.child("userName").getValue().toString();
                     userNameD.setText(userName);
+                    if (!profilImageUri.equals("")){
+                        Glide.with(HomeActivity.this).load(profilImageUri).into(profileHeader);
+                        profileOverlay.setVisibility(View.VISIBLE);
+                    }
+
                     tipeUser = dataSnapshot.child("tipe_user").getValue().toString();
                     if (greeting > 0 && greeting <= 11) {
                         txtGreeting.setText("Selamat Pagi, " + userName);
@@ -204,15 +214,32 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isFabOpen){
+                if (Config.userJalan.equals("")){
+                    Toast.makeText(HomeActivity.this, "Lengkapi profil anda terlebih dahulu!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(HomeActivity.this, EditUkmActivity.class));
+                }else if (isFabOpen){
                     fabProject.startAnimation(fabCloseAnim);
                     fabProduct.startAnimation(fabCloseAnim);
+                    fabProject.setOnClickListener(null);
+                    fabProduct.setOnClickListener(null);
                     textProduct.setVisibility(View.INVISIBLE);
                     textProject.setVisibility(View.INVISIBLE);
                     isFabOpen = false;
                 }else {
                     fabProject.startAnimation(fabOpenAnim);
                     fabProduct.startAnimation(fabOpenAnim);
+                    fabProduct.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(HomeActivity.this, AddProduct.class));
+                        }
+                    });
+                    fabProject.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(HomeActivity.this, AddProject.class));
+                        }
+                    });
                     textProduct.setVisibility(View.VISIBLE);
                     textProject.setVisibility(View.VISIBLE);
 
@@ -220,21 +247,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
-
-        fabProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, AddProduct.class));
-            }
-        });
-
-        fabProject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, AddProject.class));
-            }
-        });
-
 
         txtDate.setText(formattedDate);
 
@@ -294,6 +306,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }else {
                     drawerLayout.openDrawer(GravityCompat.START);
+                    fabProject.startAnimation(fabCloseAnim);
+                    fabProduct.startAnimation(fabCloseAnim);
+                    fabProject.setOnClickListener(null);
+                    fabProduct.setOnClickListener(null);
+                    textProduct.setVisibility(View.INVISIBLE);
+                    textProject.setVisibility(View.INVISIBLE);
+                    isFabOpen = false;
+
                 }
             }
         });
@@ -360,6 +380,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }else{
                     startActivity(new Intent(this, LoginActivity.class));
                 }
+                break;
+            case R.id.cat_food:
+                Intent intent1 = new Intent(HomeActivity.this, AllProductActivity.class);
+                intent1.putExtra(Config.PRODUCT_CAT, Config.PRODUCT_FOOD);
+                startActivity(intent1);
+                break;
+            case R.id.cat_fashion:
+                Intent intent2 = new Intent(HomeActivity.this, AllProductActivity.class);
+                intent2.putExtra(Config.PRODUCT_CAT, Config.PRODUCT_FASHION);
+                startActivity(intent2);
                 break;
         }
 

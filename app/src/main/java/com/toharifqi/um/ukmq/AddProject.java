@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -45,6 +46,7 @@ public class AddProject extends AppCompatActivity {
     private static final String REQUIRED = "Mohon masukkan data dengan benar.";
     private DatabaseReference mDatabaseReference;
     private StorageReference storageReference;
+    private FirebaseAuth fAuth;
 
     private TextInputLayout textProjectName, textProjectPrice, textProjectReturn, textProjectDesc;
 
@@ -92,6 +94,7 @@ public class AddProject extends AppCompatActivity {
             }
         });
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        fAuth = FirebaseAuth.getInstance();
     }
 
     private void setEditingEnabled(boolean enabled) {
@@ -159,6 +162,7 @@ public class AddProject extends AppCompatActivity {
         String charRandwom = generateString();
         String projectCodeNoSpaces = projectName.replace(" ", "");
         final String projectId = projectCodeNoSpaces.concat("-" + charRandwom);
+        final String productIdUser = fAuth.getCurrentUser().getUid();
 
         final String uniqueKey = mDatabaseReference.push().getKey();
         storageReference = FirebaseStorage.getInstance().getReference().child("project/" + uniqueKey).child(Config.STORAGE_PATH + projectPicUri.getLastPathSegment());
@@ -180,7 +184,7 @@ public class AddProject extends AppCompatActivity {
 
                     String city = Config.userKecamatan + ", " + Config.userKabupaten;
                     ProjectModel project = new ProjectModel(downloadURi.toString(), projectName, Config.userNamaUsaha, city,
-                            projectId, projectDesc, projectPrice, projectReturn);
+                            productIdUser, projectId, projectDesc, projectPrice, projectReturn);
 
                     Map<String, Object> postValues = project.addProject();
                     Map<String, Object> childUpdates = new HashMap<>();

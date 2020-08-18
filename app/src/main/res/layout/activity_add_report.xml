@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".AddProduct">
+        tools:context=".AddReport">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Tambah Produk"
+                    android:text="Tambah Laporan Progress"
                     android:textAlignment="textStart"
                     android:textSize="20sp"
                     android:textColor="@color/colorPrimary"/>
@@ -53,11 +53,11 @@
                 android:paddingEnd="24.0dp"
                 android:paddingBottom="100dip">
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/product_name"
+                    android:id="@+id/progress_writter"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint=" Nama Produk">
+                    android:hint=" Nama Pengisi">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -67,41 +67,27 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                
+
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/product_price"
+                    android:id="@+id/progress_title"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint=" Harga">
+                    android:hint=" Judul Project">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_baseline_local_offer_orange"
+                        android:drawableStart="@drawable/ic_baseline_title"
                         android:inputType="number"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/product_stock"
+                    android:id="@+id/progress_desc"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint=" Stok">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_baseline_stock_orange"
-                        android:inputType="number"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/product_desc"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint=" Deskripsi Produk">
+                    android:hint=" Deskripsi Progress">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -113,48 +99,18 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <LinearLayout
-                    android:layout_marginTop="6dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:background="@drawable/category_box"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_baseline_category_orange"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" Kategori"
-                            android:textSize="16sp"/>
-                    </LinearLayout>
-                    <Spinner
-                        style="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
-                        android:id="@+id/spinner_category"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="8dp"
-                        android:entries="@array/category_item"/>
-                </LinearLayout>
-
 
                 <TextView
                     android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Unggah Foto Produk"
+                    android:text="Unggah Foto Bukti Progress"
                     android:textSize="16sp"/>
                 <ImageView
                     android:background="@color/colorGreyLight"
                     android:padding="2dp"
                     android:layout_marginTop="10dp"
-                    android:id="@+id/product_image"
+                    android:id="@+id/progress_image"
                     android:scaleType="centerInside"
                     android:src="@drawable/upload_picture"
                     android:layout_width="match_parent"
@@ -193,7 +149,7 @@
         android:layout_height="100dp">
 
         <Button
-            android:id="@+id/add_product"
+            android:id="@+id/add_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

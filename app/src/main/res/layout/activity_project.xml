@@ -57,13 +57,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:onClick="toProfil"
                     android:layout_marginVertical="20dp"
                     android:orientation="horizontal">
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/image_corp"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/placeholder"
-                        android:scaleType="centerCrop"/>
+                        android:src="@drawable/profile_placeholder"
+                        android:scaleType="centerCrop" />
                     <LinearLayout
                         android:layout_marginLeft="8dp"
                         android:layout_width="wrap_content"
@@ -76,14 +81,14 @@
                             android:layout_height="wrap_content"
                             android:text="Deni Corp"
                             android:textColor="@color/colorBlack"
-                            android:textSize="30sp" />
+                            android:textSize="24sp" />
 
                         <TextView
                             android:id="@+id/project_city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pacitan city"
-                            android:textSize="18sp"/>
+                            android:textSize="14sp"/>
                     </LinearLayout>
                 </LinearLayout>
 

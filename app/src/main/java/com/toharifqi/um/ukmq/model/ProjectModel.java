@@ -7,30 +7,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProjectModel implements Parcelable {
-    String projectPic, projectName, projectCode, projectCity, projectId, projectDesc;
+    String projectPic, projectName, projectCode, projectCity, projectUserId, projectDesc, projectParentId;
     int projectPrice, projectReturn;
 
     public ProjectModel() {
     }
 
-    public ProjectModel(String projectPic, String projectName, String projectCode, String projectCity, String projectId, String projectDesc, int projectPrice, int projectReturn) {
+    public ProjectModel(String projectPic, String projectName, String projectCode, String projectCity, String projectId, String projectParentId, String projectDesc, int projectPrice, int projectReturn) {
         this.projectPic = projectPic;
         this.projectName = projectName;
         this.projectCode = projectCode;
         this.projectCity = projectCity;
-        this.projectId = projectId;
+        this.projectUserId = projectId;
         this.projectDesc = projectDesc;
         this.projectPrice = projectPrice;
         this.projectReturn = projectReturn;
+        this.projectParentId = projectParentId;
     }
+
 
     protected ProjectModel(Parcel in) {
         projectPic = in.readString();
         projectName = in.readString();
         projectCode = in.readString();
         projectCity = in.readString();
-        projectId = in.readString();
+        projectUserId = in.readString();
         projectDesc = in.readString();
+        projectParentId = in.readString();
         projectPrice = in.readInt();
         projectReturn = in.readInt();
     }
@@ -79,12 +82,12 @@ public class ProjectModel implements Parcelable {
         this.projectCity = projectCity;
     }
 
-    public String getProjectId() {
-        return projectId;
+    public String getProjectUserId() {
+        return projectUserId;
     }
 
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
+    public void setProjectUserId(String projectUserId) {
+        this.projectUserId = projectUserId;
     }
 
     public String getProjectDesc() {
@@ -111,6 +114,14 @@ public class ProjectModel implements Parcelable {
         this.projectReturn = projectReturn;
     }
 
+    public String getProjectParentId() {
+        return projectParentId;
+    }
+
+    public void setProjectParentId(String projectParentId) {
+        this.projectParentId = projectParentId;
+    }
+
     public Map<String, Object> addProject() {
         HashMap<String, Object> result = new HashMap<>();
 
@@ -118,12 +129,14 @@ public class ProjectModel implements Parcelable {
         result.put("projectName", projectName);
         result.put("projectCode", projectCode);
         result.put("projectCity", projectCity);
-        result.put("projectId", projectId);
+        result.put("projectUserId", projectUserId);
+        result.put("projectParentId", projectParentId);
         result.put("projectDesc", projectDesc);
         result.put("projectPrice", projectPrice);
         result.put("projectReturn", projectReturn);
         return result;
     }
+
 
     @Override
     public int describeContents() {
@@ -136,8 +149,9 @@ public class ProjectModel implements Parcelable {
         dest.writeString(projectName);
         dest.writeString(projectCode);
         dest.writeString(projectCity);
-        dest.writeString(projectId);
+        dest.writeString(projectUserId);
         dest.writeString(projectDesc);
+        dest.writeString(projectParentId);
         dest.writeInt(projectPrice);
         dest.writeInt(projectReturn);
     }

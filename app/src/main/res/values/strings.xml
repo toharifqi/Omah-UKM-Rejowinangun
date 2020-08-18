@@ -14,4 +14,9 @@ dengan margin keuntungan Rp 3 000
 per produk dan dengan jumlah rata
 rata penjualan yang diekspektasikan
 yaitu 3000 pcs per hari </string>
+    <string-array name="category_item">
+        <item>-</item>
+        <item>Food and Baverages</item>
+        <item>Fashion</item>
+    </string-array>
 </resources>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGreyLight"
+    android:fitsSystemWindows="true"
     tools:context=".ProfilActivity">
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -20,17 +21,20 @@
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_baseline_arrow_back_orange"
         app:tint="@null"/>
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <RelativeLayout
+        android:layout_height="wrap_content"
+        android:background="@drawable/profile_bg"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/tab_collapse_profile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="330dp"
-                android:background="@drawable/profile_bg"/>
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:titleEnabled="false">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,6 +58,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/profil_email"
@@ -74,10 +79,10 @@
                         android:textColor="@color/white"/>
                 </LinearLayout>
                 <Button
+                    android:id="@+id/edit_profile_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
                     android:background="@drawable/rounded_btn"
                     android:drawableLeft="@drawable/ic_baseline_create_white"
                     android:onClick="toEditProfile"
@@ -85,437 +90,52 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textStyle="bold"/>
-
-            </LinearLayout>
-        </RelativeLayout>
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never"
-            android:scrollbars="none">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardprofil_ukm"
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="18dp"
-                    android:layout_marginTop="18dp"
-                    android:elevation="8dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardUseCompatPadding="true">
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    app:tabIndicatorHeight="48dp"
+                    android:background="@drawable/md_transparent"
+                    app:tabTextColor="@color/white"
+                    app:tabSelectedTextColor="@color/colorPrimaryDark"
+                    app:tabIndicator="@drawable/tab_selector"
+                    app:tabIndicatorColor="@color/white"
+                    app:tabGravity="fill"
+                    app:tabMode="fixed"
+                    android:clickable="false"
+                    app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget">
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tabProfil"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="24dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="8dp"
-                            android:text="PROFILE"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"/>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Kode: PU-"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_pu"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Nama Usaha: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_usaha"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Nama Pemilik: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_pemilik"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Nama Merk: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_merk"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="No Telepon: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_telp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
+                        android:text="Profil" />
 
-
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardprofil_investor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="18dp"
-                    android:layout_marginTop="18dp"
-                    android:elevation="8dp"
-                    android:visibility="gone"
-                    app:cardCornerRadius="8dp"
-                    app:cardUseCompatPadding="true">
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tabProduk"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="24dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="8dp"
-                            android:text="PROFILE"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"/>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="No Telepon: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profilinvestor_telp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                        android:text="Produk" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Jalan/Desa: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profilinvestor_jalan"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Rt/Rw: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profilinvestor_rtrw"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Kecamatan: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profilinvestor_kecamatan"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Kabupaten/Kota: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profilinvestor_kabupaten"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="18dp"
-                    android:layout_marginTop="18dp"
-                    android:elevation="8dp"
-                    android:id="@+id/cardizin_ukm"
-                    app:cardCornerRadius="8dp"
-                    app:cardUseCompatPadding="true">
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.tabs.TabItem
+                        android:id="@+id/tabProject"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="24dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="8dp"
-                            android:text="IZIN USAHA"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"/>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="PIRT: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_pirt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="BPOM: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_bpom"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="HALAL: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_halal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="SNI: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_sni"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                    </LinearLayout>
+                        android:text="Project" />
 
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/cardalamat_ukm"
-                    android:layout_margin="18dp"
-                    android:elevation="8dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardUseCompatPadding="true">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="24dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="8dp"
-                            android:text="ALAMAT"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18sp"/>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Jalan/Desa: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_jalan"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Rt/Rw: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_rtrw"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Kecamatan: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_kecamatan"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Kabupaten/Kota: "
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp"/>
-                            <TextView
-                                android:id="@+id/profil_kabupaten"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="(Belum diisi)"
-                                android:textSize="16sp"/>
-                        </LinearLayout>
-                    </LinearLayout>
+                </com.google.android.material.tabs.TabLayout>
 
-                </androidx.cardview.widget.CardView>
+
 
             </LinearLayout>
 
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        </ScrollView>
-
-    </LinearLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
 

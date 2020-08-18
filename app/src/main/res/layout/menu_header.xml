@@ -4,11 +4,24 @@
     android:layout_height="240dp"
     android:orientation="vertical">
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/navigation_bg"
-        android:scaleType="centerCrop"/>
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/profile_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/navigation_bg"
+            android:scaleType="centerCrop"/>
+        <LinearLayout
+            android:id="@+id/profile_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            android:background="@drawable/profil_overlay"/>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

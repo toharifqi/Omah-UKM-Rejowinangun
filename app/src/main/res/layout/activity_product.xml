@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="44dp"
-            android:src="@drawable/product_placeholder"/>
+            />
 
     </RelativeLayout>
     <ScrollView
@@ -132,9 +132,10 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
                         <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/image_corp"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/placeholder"
+                            android:src="@drawable/profile_placeholder"
                             android:scaleType="centerCrop"/>
                         <LinearLayout
                             android:layout_marginLeft="8dp"
@@ -163,7 +164,8 @@
                             android:textColor="@color/colorDarkGrey"
                             android:backgroundTint="@color/white"
                             android:textAlignment="textStart"
-                            android:drawableLeft="@drawable/ic_baseline_home"
+                            android:onClick="toProfil"
+                            android:drawableLeft="@drawable/ic_baseline_person"
                             android:text="Kunjungi UKM"/>
                     </LinearLayout>
                 </LinearLayout>

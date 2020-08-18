@@ -1,7 +1,7 @@
 package com.toharifqi.um.ukmq.helpers;
 
 public class Config {
-    public static String tipe_user;
+
     public static final int PHOTO_REQUEST_CODE=1000;
     public final static String IMAGE_URL_NULL_MESSAGE="Pilihlah gambar produk!";
     public final static String CHECKOUT_NAME="Nama_Checkout";
@@ -11,6 +11,9 @@ public class Config {
     public final static String PROFIL_EDIT_SUCCESS_MSG="Profil berhasil diubah!";
     public final static String PRODUCT_MODEL="productModelParcelable";
     public final static String PROJECT_MODEL="projectModelParcelable";
+    public final static String PRODUCT_CAT="productCat";
+    public final static String PRODUCT_FOOD="Food and Baverages";
+    public final static String PRODUCT_FASHION="Fashion";
 
     public final static String USER_NAME ="userName";
     public final static String KODE_PU ="kodePu";
@@ -27,8 +30,11 @@ public class Config {
     public final static String KECAMATAN ="profilKecamatan";
     public final static String KABUPATEN ="profilKabupaten";
     public final static String PROFIL_PIC ="profilPicture";
+    public final static String USER_ID ="userId";
+    public final static String USER_TYPE ="tipe_user";
 
     //user data
+    public static String tipe_user;
     public static String userNamaUsaha;
     public static String userJalan;
     public static String userKabupaten;

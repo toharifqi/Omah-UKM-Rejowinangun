@@ -1,49 +1,60 @@
-package com.toharifqi.um.ukmq;
+package com.toharifqi.um.ukmq.fragment;
+
+import android.app.AlertDialog;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.toharifqi.um.ukmq.AllProductActivity;
+import com.toharifqi.um.ukmq.R;
 import com.toharifqi.um.ukmq.adapter.ProductGridAdapter;
-import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.listener.IFirebaseLoadDoneProduct;
 import com.toharifqi.um.ukmq.model.ProductModel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
-public class AllProductActivity extends AppCompatActivity implements IFirebaseLoadDoneProduct {
+/**
+ * A simple {@link Fragment} subclass.
+ * create an instance of this fragment.
+ */
+public class tabProduct extends Fragment implements IFirebaseLoadDoneProduct {
     private RecyclerView productRecyclerView;
     private ProductGridAdapter productGridAdapter;
-
-    AlertDialog dialog;
+    private ImageView emptyImage;
 
     IFirebaseLoadDoneProduct iFirebaseLoadDone;
 
-    Toolbar mToolbar;
-
-    Query query;
+    DatabaseReference productDb;
+    FirebaseUser fUser;
 
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             List<ProductModel> productList = new ArrayList<>();
+            if (!dataSnapshot.exists()){
+                emptyImage.setVisibility(View.VISIBLE);
+            }
             for (DataSnapshot productSnapshot:dataSnapshot.getChildren())
                 productList.add(productSnapshot.getValue(ProductModel.class));
             iFirebaseLoadDone.onFirebaseLoadSuccess(productList);
@@ -55,70 +66,47 @@ public class AllProductActivity extends AppCompatActivity implements IFirebaseLo
         }
     };
 
+    public tabProduct() {
+        // Required empty public constructor
+    }
+
+    Query query;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_product);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_tab_product, container, false);
 
-        // Action Bar
-        mToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.close);
-
-        Bundle intent = getIntent().getExtras();
-        assert intent != null;
-        String productType = null;
-
-        if (getIntent().getExtras() == null){
-            query = FirebaseDatabase.getInstance().getReference("products");
-        }else if (getIntent().getExtras() != null){
-            productType = intent.getString(Config.PRODUCT_CAT);
-            if (productType.equals(Config.PRODUCT_FOOD)){
-                query = FirebaseDatabase.getInstance().getReference("products").orderByChild("productCat").equalTo(Config.PRODUCT_FOOD);
-            }else {
-                query = FirebaseDatabase.getInstance().getReference("products").orderByChild("productCat").equalTo(Config.PRODUCT_FASHION);
-            }
-        }
-
+        productDb = FirebaseDatabase.getInstance().getReference("products");
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+        query = productDb.orderByChild("productId").equalTo(fUser.getUid());
+        emptyImage = view.findViewById(R.id.empty_image);
 
         iFirebaseLoadDone = this;
 
-        //to display loading dialog
-        dialog = new SpotsDialog.Builder().setContext(AllProductActivity.this).build();
-        dialog.setMessage("Mohon tunggu...");
 
         loadProduct();
 
-        productRecyclerView = findViewById(R.id.recyclerview_id);
-        productRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        productRecyclerView = view.findViewById(R.id.recyclerview_id);
+        productRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
+        return view;
     }
 
     private void loadProduct() {
-        dialog.show();
         query.addValueEventListener(valueEventListener);
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-    @Override
     public void onFirebaseLoadSuccess(List<ProductModel> productList) {
-        productGridAdapter = new ProductGridAdapter(AllProductActivity.this, productList);
+        productGridAdapter = new ProductGridAdapter(getActivity(), productList);
         productRecyclerView.setAdapter(productGridAdapter);
-        dialog.dismiss();
     }
 
     @Override
     public void onFirebaseLoadFailed(String message) {
-        Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
-        dialog.dismiss();
+        Toast.makeText(getActivity(), "" + message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
