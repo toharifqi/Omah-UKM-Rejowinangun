@@ -24,6 +24,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.toharifqi.um.ukmq.R;
 import com.toharifqi.um.ukmq.adapter.ProjectGridAdapter;
+import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.listener.IFirebaseLoadDoneProject;
 import com.toharifqi.um.ukmq.model.ProductModel;
 import com.toharifqi.um.ukmq.model.ProjectModel;
@@ -78,7 +79,19 @@ public class tabProject extends Fragment implements IFirebaseLoadDoneProject{
 
         projectDb = FirebaseDatabase.getInstance().getReference("projects");
         fUser = FirebaseAuth.getInstance().getCurrentUser();
-        query = projectDb.orderByChild("projectId").equalTo(fUser.getUid());
+
+        //data from product or project activity
+        Bundle intent = getActivity().getIntent().getExtras();
+        assert intent != null;
+        String uId = null;
+
+        if (getActivity().getIntent().getExtras() ==  null){
+            uId = fUser.getUid();
+        }else if (getActivity().getIntent().getExtras() != null){
+            uId = intent.getString(Config.USER_ID);
+        }
+
+        query = projectDb.orderByChild("projectUserId").equalTo(uId);
         emptyImage = view.findViewById(R.id.empty_image);
 
         iFirebaseLoadDone = this;

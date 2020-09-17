@@ -81,6 +81,7 @@
                 android:textColor="@color/colorGold"
                 android:text="Rp. 1.000"/>
             <Button
+                android:theme="@style/AppTheme"
                 android:id="@+id/invest_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -23,6 +23,7 @@ import com.toharifqi.um.ukmq.listener.IFirebaseLoadDoneProject;
 import com.toharifqi.um.ukmq.model.ProjectModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProjectFragment extends Fragment implements IFirebaseLoadDoneProject {
@@ -94,6 +95,7 @@ public class ProjectFragment extends Fragment implements IFirebaseLoadDoneProjec
 
     @Override
     public void onFirebaseLoadSuccess(List<ProjectModel> projectList) {
+        Collections.reverse(projectList);
         projectAdapter = new ProjectAdapter(projectList, getContext());
         viewPagerProject.setAdapter(projectAdapter);
         shimmerProject.setVisibility(View.GONE);

@@ -11,12 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddReport"></activity>
+        <activity android:name=".ProgressDetailActivity"></activity>
+        <activity android:name=".ProgressActivity" />
+        <activity android:name=".OngoingProjectActivity" />
+        <activity android:name=".NewsActivity" />
+        <activity android:name=".AddReport" />
         <activity android:name=".AllProjectActivity" />
         <activity android:name=".AllProductActivity" />
         <activity android:name=".EditUkmActivity" />
         <activity android:name=".EditInvestorActivity" />
-        <activity android:name=".ProfilActivity" />
+        <activity
+            android:name=".ProfilActivity"
+            android:theme="@style/AppThemeProfile" />
         <activity android:name=".CheckInvestActivity" />
         <activity android:name=".ProjectActivity" />
         <activity android:name=".ProductActivity" />

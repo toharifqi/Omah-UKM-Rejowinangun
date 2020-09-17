@@ -23,6 +23,7 @@ import com.toharifqi.um.ukmq.listener.IFirebaseLoadDoneProduct;
 import com.toharifqi.um.ukmq.model.ProductModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProductFragment extends Fragment implements IFirebaseLoadDoneProduct {
@@ -95,6 +96,7 @@ public class ProductFragment extends Fragment implements IFirebaseLoadDoneProduc
 
     @Override
     public void onFirebaseLoadSuccess(List<ProductModel> productList) {
+        Collections.reverse(productList);
         productAdapter = new ProductAdapter(productList, getContext());
         viewPagerProduct.setAdapter(productAdapter);
         shimmerLayout.setVisibility(View.GONE);

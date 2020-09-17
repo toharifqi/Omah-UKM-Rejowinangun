@@ -4,54 +4,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProgressModel {
-    String progressWriter, progressTitle, progressDesc, docPic, proggressId;
+    String progressWriter, progressTitle, progressDesc, docPic, proggressId, timeStamp, progressIdUser;
 
-    public ProgressModel(String namaPengisi, String progressTitle, String progressDesc, String docPic, String proggressId) {
+    public ProgressModel() {
+    }
+
+    public ProgressModel(String namaPengisi, String progressTitle, String progressDesc, String docPic, String proggressId, String timeStamp, String progressIdUser) {
         this.progressWriter = namaPengisi;
         this.progressTitle = progressTitle;
         this.progressDesc = progressDesc;
         this.docPic = docPic;
         this.proggressId = proggressId;
+        this.timeStamp = timeStamp;
+        this.progressIdUser = progressIdUser;
     }
 
     public String getProgressWriter() {
         return progressWriter;
     }
 
-    public void setProgressWriter(String progressWriter) {
-        this.progressWriter = progressWriter;
-    }
-
     public String getProgressTitle() {
         return progressTitle;
-    }
-
-    public void setProgressTitle(String progressTitle) {
-        this.progressTitle = progressTitle;
     }
 
     public String getProgressDesc() {
         return progressDesc;
     }
 
-    public void setProgressDesc(String progressDesc) {
-        this.progressDesc = progressDesc;
-    }
-
     public String getDocPic() {
         return docPic;
-    }
-
-    public void setDocPic(String docPic) {
-        this.docPic = docPic;
     }
 
     public String getProggressId() {
         return proggressId;
     }
 
-    public void setProggressId(String proggressId) {
-        this.proggressId = proggressId;
+    public String getTimeStamp() {
+        return timeStamp;
     }
 
     public Map<String, Object> addProgress() {
@@ -61,6 +50,8 @@ public class ProgressModel {
         result.put("progressDesc", progressDesc);
         result.put("docPic", docPic);
         result.put("progressId", proggressId);
+        result.put("timeStamp", timeStamp);
+        result.put("progressIdUser", progressIdUser);
         return result;
     }
 }

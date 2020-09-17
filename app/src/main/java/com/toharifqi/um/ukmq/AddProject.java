@@ -32,6 +32,8 @@ import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.model.ProductModel;
 import com.toharifqi.um.ukmq.model.ProjectModel;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -48,7 +50,7 @@ public class AddProject extends AppCompatActivity {
     private StorageReference storageReference;
     private FirebaseAuth fAuth;
 
-    private TextInputLayout textProjectName, textProjectPrice, textProjectReturn, textProjectDesc;
+    private TextInputLayout textProjectName, textProjectPrice, textProjectReturn, textProjectMonth, textProjectDesc;
 
     private ImageView projectPic;
     private Uri projectPicUri;
@@ -70,6 +72,7 @@ public class AddProject extends AppCompatActivity {
         textProjectName = findViewById(R.id.project_name);
         textProjectPrice = findViewById(R.id.project_price);
         textProjectReturn = findViewById(R.id.project_return);
+        textProjectMonth = findViewById(R.id.project_month);
         textProjectDesc = findViewById(R.id.project_desc);
 
         projectPic = findViewById(R.id.project_image);
@@ -128,6 +131,7 @@ public class AddProject extends AppCompatActivity {
         final String projectName = textProjectName.getEditText().getText().toString();
         final int projectPrice = Integer.parseInt(textProjectPrice.getEditText().getText().toString());
         final int projectReturn = Integer.parseInt(textProjectReturn.getEditText().getText().toString());
+        final int projectMonth = Integer.parseInt(textProjectMonth.getEditText().getText().toString());
         final String projectDesc = textProjectDesc.getEditText().getText().toString();
 
         boolean isNullPhotoUrl = projectPicUri == null;
@@ -141,6 +145,9 @@ public class AddProject extends AppCompatActivity {
         }else if (projectReturn == 0){
             showDialogNoInput();
             textProjectReturn.setError(REQUIRED);
+        }else if (projectMonth == 0){
+            showDialogNoInput();
+            textProjectMonth.setError(REQUIRED);
         }else if (projectDesc.isEmpty()){
             showDialogNoInput();
             textProjectDesc.setError(REQUIRED);
@@ -152,16 +159,16 @@ public class AddProject extends AppCompatActivity {
         }
 
         if (!isNullPhotoUrl){
-            writeNewPost(projectName, projectPrice, projectReturn, projectDesc, projectPicUri);
+            writeNewPost(projectName, projectPrice, projectReturn, projectMonth, projectDesc, projectPicUri);
             setEditingEnabled(true);
         }
     }
 
     private void writeNewPost(final String projectName,
-                              final int projectPrice, final int projectReturn, final String projectDesc, Uri projectPicUri) {
-        String charRandwom = generateString();
-        String projectCodeNoSpaces = projectName.replace(" ", "");
-        final String projectId = projectCodeNoSpaces.concat("-" + charRandwom);
+                              final int projectPrice, final int projectReturn, final int projectMonth, final String projectDesc, Uri projectPicUri) {
+
+        Date timeStamp = Calendar.getInstance().getTime();
+        final String projectId = timeStamp.toString().replace(" ","");
         final String productIdUser = fAuth.getCurrentUser().getUid();
 
         final String uniqueKey = mDatabaseReference.push().getKey();
@@ -184,7 +191,7 @@ public class AddProject extends AppCompatActivity {
 
                     String city = Config.userKecamatan + ", " + Config.userKabupaten;
                     ProjectModel project = new ProjectModel(downloadURi.toString(), projectName, Config.userNamaUsaha, city,
-                            productIdUser, projectId, projectDesc, projectPrice, projectReturn);
+                            productIdUser, projectId, projectMonth, projectDesc, projectPrice, projectReturn, 0);
 
                     Map<String, Object> postValues = project.addProject();
                     Map<String, Object> childUpdates = new HashMap<>();
@@ -202,15 +209,15 @@ public class AddProject extends AppCompatActivity {
 
     }
 
-    private String generateString() {
-        char[] chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890".toCharArray();
-        StringBuilder stringBuilder = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i< 5; i++){
-            char c = chars[random.nextInt(chars.length)];
-            stringBuilder.append(c);
-        } return stringBuilder.toString();
-    }
+//    private String generateString() {
+//        char[] chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890".toCharArray();
+//        StringBuilder stringBuilder = new StringBuilder();
+//        Random random = new Random();
+//        for (int i = 0; i< 5; i++){
+//            char c = chars[random.nextInt(chars.length)];
+//            stringBuilder.append(c);
+//        } return stringBuilder.toString();
+//    }
 
     private void captureImage() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

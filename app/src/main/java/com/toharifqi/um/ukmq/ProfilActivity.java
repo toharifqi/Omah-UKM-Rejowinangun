@@ -10,24 +10,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.toharifqi.um.ukmq.adapter.ProfilTabAdapter;
 import com.toharifqi.um.ukmq.helpers.Config;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfilActivity extends AppCompatActivity {
-    FirebaseAuth fAuth;
+    FirebaseUser fUser;
     DatabaseReference userDb;
     CircleImageView profilPhoto;
     TextView txtEmailUser, txtUserName, txtTipeAkun;
@@ -39,6 +45,10 @@ public class ProfilActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ProfilTabAdapter profilTabAdapter;
     private Button editButton;
+    private String uId;
+    private String profilPic;
+
+    StorageReference firebaseStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,20 +64,19 @@ public class ProfilActivity extends AppCompatActivity {
             }
         });
 
-        fAuth = FirebaseAuth.getInstance();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
         editButton = findViewById(R.id.edit_profile_btn);
 
         //data from product or project activity
         Bundle intent = getIntent().getExtras();
         assert intent != null;
-        String uId = null;
+        uId = null;
 
         if (getIntent().getExtras() ==  null){
-            uId = fAuth.getUid();
+            uId = fUser.getUid();
         }else if (getIntent().getExtras() != null){
             uId = intent.getString(Config.USER_ID);
             editButton.setVisibility(View.GONE);
-
         }
 
         //firebase initialization
@@ -87,7 +96,7 @@ public class ProfilActivity extends AppCompatActivity {
                 String tipeUser = dataSnapshot.child("tipe_user").getValue().toString();
                 String emailUser = dataSnapshot.child("email").getValue().toString();
                 String namaPemilik = dataSnapshot.child(Config.NAMA_PEMILIK).getValue().toString();
-                String profilPic = dataSnapshot.child(Config.PROFIL_PIC).getValue().toString();
+                profilPic = dataSnapshot.child(Config.PROFIL_PIC).getValue().toString();
                 txtUserName.setText(namaPemilik);
                 txtEmailUser.setText(emailUser);
                 if (tipeUser.equals("1")){
@@ -95,7 +104,7 @@ public class ProfilActivity extends AppCompatActivity {
                 }else {
                     txtTipeAkun.setText("Akun Investor");
                 }
-                if (!profilPic.isEmpty()){
+                if (!profilPic.isEmpty() && !ProfilActivity.this.isDestroyed()){
                     Glide.with(ProfilActivity.this).load(profilPic).into(profilPhoto);
                 }
             }
@@ -144,9 +153,10 @@ public class ProfilActivity extends AppCompatActivity {
     }
 
     public void toEditProfile (View view){
-
         if (Config.tipe_user.equals("1")){
-            startActivity(new Intent(ProfilActivity.this, EditUkmActivity.class));
+            Intent intent = new Intent(ProfilActivity.this, EditUkmActivity.class);
+            intent.putExtra(Config.PROFIL_PIC, profilPic);
+            startActivity(intent);
         }else {
             startActivity(new Intent(ProfilActivity.this, EditInvestorActivity.class));
         }

@@ -7,20 +7,7 @@
     android:background="@color/colorGreyLight"
     android:fitsSystemWindows="true"
     tools:context=".ProfilActivity">
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_margin="18dp"
-        android:adjustViewBounds="false"
-        android:background="@color/white"
-        android:cropToPadding="false"
-        android:scaleType="centerCrop"
-        app:backgroundTint="@color/white"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_orange"
-        app:tint="@null"/>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@drawable/rounded_btn"
+                    android:theme="@style/AppTheme"
                     android:drawableLeft="@drawable/ic_baseline_create_white"
                     android:onClick="toEditProfile"
                     android:text="Edit Profile"
@@ -123,10 +111,13 @@
                         android:text="Project" />
 
                 </com.google.android.material.tabs.TabLayout>
-
-
-
             </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:layout_collapseMode="pin"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -137,6 +128,20 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="18dp"
+        android:adjustViewBounds="false"
+        android:background="@color/white"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        app:backgroundTint="@color/white"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_orange"
+        app:tint="@null"/>
 
 
 

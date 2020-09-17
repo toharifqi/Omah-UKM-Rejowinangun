@@ -35,6 +35,8 @@ import com.google.firebase.storage.UploadTask;
 import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.model.ProductModel;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -156,9 +158,8 @@ public class AddProduct extends AppCompatActivity implements AdapterView.OnItemS
     private void writeNewPost(final String productName, final String productDesc, final String productCat,
                               final int productPrice, final int productStock, Uri productPicUri) {
 
-        String charRandom = generateString();
-        String productCodeNospaces = productName.replace(" ", "");
-        final String productId = productCodeNospaces.concat("-" + charRandom);
+        Date timeStamp = Calendar.getInstance().getTime();
+        final String productId = timeStamp.toString().replace(" ","");
         final String productIdUser = fAuth.getCurrentUser().getUid();
 
         final String uniqueKey = mDatabaseReference.push().getKey();
@@ -201,15 +202,15 @@ public class AddProduct extends AppCompatActivity implements AdapterView.OnItemS
 
     }
 
-    private String generateString() {
-        char[] chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890".toCharArray();
-        StringBuilder stringBuilder = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i< 5; i++){
-            char c = chars[random.nextInt(chars.length)];
-            stringBuilder.append(c);
-        } return stringBuilder.toString();
-    }
+//    private String generateString() {
+//        char[] chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890".toCharArray();
+//        StringBuilder stringBuilder = new StringBuilder();
+//        Random random = new Random();
+//        for (int i = 0; i< 5; i++){
+//            char c = chars[random.nextInt(chars.length)];
+//            stringBuilder.append(c);
+//        } return stringBuilder.toString();
+//    }
 
     private void captureImage() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

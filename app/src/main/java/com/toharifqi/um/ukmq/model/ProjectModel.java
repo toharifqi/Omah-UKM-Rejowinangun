@@ -8,21 +8,23 @@ import java.util.Map;
 
 public class ProjectModel implements Parcelable {
     String projectPic, projectName, projectCode, projectCity, projectUserId, projectDesc, projectParentId;
-    int projectPrice, projectReturn;
+    int projectPrice, projectReturn, projectMonth, projectInvested;
 
     public ProjectModel() {
     }
 
-    public ProjectModel(String projectPic, String projectName, String projectCode, String projectCity, String projectId, String projectParentId, String projectDesc, int projectPrice, int projectReturn) {
+    public ProjectModel(String projectPic, String projectName, String projectCode, String projectCity, String projectId, String projectParentId, int projectMonth, String projectDesc, int projectPrice, int projectReturn, int projectInvested) {
         this.projectPic = projectPic;
         this.projectName = projectName;
         this.projectCode = projectCode;
         this.projectCity = projectCity;
         this.projectUserId = projectId;
+        this.projectMonth = projectMonth;
         this.projectDesc = projectDesc;
         this.projectPrice = projectPrice;
         this.projectReturn = projectReturn;
         this.projectParentId = projectParentId;
+        this.projectInvested = projectInvested;
     }
 
 
@@ -32,10 +34,12 @@ public class ProjectModel implements Parcelable {
         projectCode = in.readString();
         projectCity = in.readString();
         projectUserId = in.readString();
+        projectMonth = in.readInt();
         projectDesc = in.readString();
         projectParentId = in.readString();
         projectPrice = in.readInt();
         projectReturn = in.readInt();
+        projectInvested = in.readInt();
     }
 
     public static final Creator<ProjectModel> CREATOR = new Creator<ProjectModel>() {
@@ -50,68 +54,44 @@ public class ProjectModel implements Parcelable {
         }
     };
 
-    public String getProjectPic() {
-        return projectPic;
+    public int getProjectMonth() {
+        return projectMonth;
     }
 
-    public void setProjectPic(String projectPic) {
-        this.projectPic = projectPic;
+    public int getProjectInvested() {
+        return projectInvested;
+    }
+
+    public String getProjectPic() {
+        return projectPic;
     }
 
     public String getProjectName() {
         return projectName;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
     public String getProjectCode() {
         return projectCode;
-    }
-
-    public void setProjectCode(String projectCode) {
-        this.projectCode = projectCode;
     }
 
     public String getProjectCity() {
         return projectCity;
     }
 
-    public void setProjectCity(String projectCity) {
-        this.projectCity = projectCity;
-    }
-
     public String getProjectUserId() {
         return projectUserId;
-    }
-
-    public void setProjectUserId(String projectUserId) {
-        this.projectUserId = projectUserId;
     }
 
     public String getProjectDesc() {
         return projectDesc;
     }
 
-    public void setProjectDesc(String projectDesc) {
-        this.projectDesc = projectDesc;
-    }
-
     public int getProjectPrice() {
         return projectPrice;
     }
 
-    public void setProjectPrice(int projectPrice) {
-        this.projectPrice = projectPrice;
-    }
-
     public int getProjectReturn() {
         return projectReturn;
-    }
-
-    public void setProjectReturn(int projectReturn) {
-        this.projectReturn = projectReturn;
     }
 
     public String getProjectParentId() {
@@ -131,12 +111,13 @@ public class ProjectModel implements Parcelable {
         result.put("projectCity", projectCity);
         result.put("projectUserId", projectUserId);
         result.put("projectParentId", projectParentId);
+        result.put("projectMonth", projectMonth);
         result.put("projectDesc", projectDesc);
         result.put("projectPrice", projectPrice);
         result.put("projectReturn", projectReturn);
+        result.put("projectInvested", projectInvested);
         return result;
     }
-
 
     @Override
     public int describeContents() {
@@ -144,15 +125,17 @@ public class ProjectModel implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(projectPic);
-        dest.writeString(projectName);
-        dest.writeString(projectCode);
-        dest.writeString(projectCity);
-        dest.writeString(projectUserId);
-        dest.writeString(projectDesc);
-        dest.writeString(projectParentId);
-        dest.writeInt(projectPrice);
-        dest.writeInt(projectReturn);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(projectPic);
+        parcel.writeString(projectName);
+        parcel.writeString(projectCode);
+        parcel.writeString(projectCity);
+        parcel.writeString(projectUserId);
+        parcel.writeInt(projectMonth);
+        parcel.writeString(projectDesc);
+        parcel.writeString(projectParentId);
+        parcel.writeInt(projectPrice);
+        parcel.writeInt(projectReturn);
+        parcel.writeInt(projectInvested);
     }
 }

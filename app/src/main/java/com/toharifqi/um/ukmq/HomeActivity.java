@@ -72,7 +72,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_home);
 
         toolbar = findViewById(R.id.toolBar);
@@ -270,10 +269,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 slideList.add(new SlideModel(url1, ScaleTypes.CENTER_CROP));
                 slideList.add(new SlideModel(url2, ScaleTypes.CENTER_CROP));
                 slideList.add(new SlideModel(url3, ScaleTypes.CENTER_CROP));
-                contentList.add(new SlideModel(urlContent0, ScaleTypes.FIT));
-                contentList.add(new SlideModel(urlContent1, ScaleTypes.FIT));
-                contentList.add(new SlideModel(urlContent2, ScaleTypes.FIT));
-                contentList.add(new SlideModel(urlContent3, ScaleTypes.FIT));
+                contentList.add(new SlideModel(urlContent0, ScaleTypes.CENTER_INSIDE));
+                contentList.add(new SlideModel(urlContent1, ScaleTypes.CENTER_INSIDE));
+                contentList.add(new SlideModel(urlContent2, ScaleTypes.CENTER_INSIDE));
+                contentList.add(new SlideModel(urlContent3, ScaleTypes.CENTER_INSIDE));
                 imageSlider.setImageList(slideList, ScaleTypes.CENTER_CROP);
                 contentSlider.setImageList(contentList, ScaleTypes.FIT);
             }
@@ -390,6 +389,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent2 = new Intent(HomeActivity.this, AllProductActivity.class);
                 intent2.putExtra(Config.PRODUCT_CAT, Config.PRODUCT_FASHION);
                 startActivity(intent2);
+                break;
+            case R.id.nav_news:
+                startActivity(new Intent(HomeActivity.this, NewsActivity.class));
+                break;
+            case R.id.nav_projek_berjalan:
+
+                startActivity(new Intent(HomeActivity.this, OngoingProjectActivity.class));
                 break;
         }
 

@@ -14,6 +14,15 @@ public class Config {
     public final static String PRODUCT_CAT="productCat";
     public final static String PRODUCT_FOOD="Food and Baverages";
     public final static String PRODUCT_FASHION="Fashion";
+    public final static String PROJECT_INVESTED_PER_MONTH="projectInvestedPerMonth";
+    public final static String PROJECT_ID="projectId";
+    public final static String PROJECT_INVESTED="projectInvested";
+
+    public final static String PROGRESS_TITLE="progressTitle";
+    public final static String PROGRESS_WRITER="progressWriter";
+    public final static String PROGRESS_DESC="progressDesc";
+    public final static String PROGRESS_DATE="progressDate";
+    public final static String PROGRESS_IMAGE="progressImage";
 
     public final static String USER_NAME ="userName";
     public final static String KODE_PU ="kodePu";
@@ -30,6 +39,7 @@ public class Config {
     public final static String KECAMATAN ="profilKecamatan";
     public final static String KABUPATEN ="profilKabupaten";
     public final static String PROFIL_PIC ="profilPicture";
+    public final static String PROJECT_NAME ="projectName";
     public final static String USER_ID ="userId";
     public final static String USER_TYPE ="tipe_user";
 

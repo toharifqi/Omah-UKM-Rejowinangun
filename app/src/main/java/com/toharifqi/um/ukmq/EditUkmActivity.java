@@ -39,13 +39,14 @@ public class EditUkmActivity extends AppCompatActivity {
     private static final String TAG = "NewProjectActivity";
     private static final String REQUIRED = "Mohon masukkan data dengan benar.";
     private DatabaseReference mDatabaseReference, userDb;
-    private StorageReference storageReference;
+    private StorageReference storageReference, storageReferenceOld;
 
     TextInputLayout txtKodePu, txtNamaUsaha, txtNamaPemilik, txtNamaMerk, txtNoTelepon,
     txtPirt, txtBpom, txtHalal, txtSni, txtJalan, txtRt, txtKecamatan, txtKabupaten;
 
     private ImageView profilPic;
     private Uri profilPicUri;
+    private String imageUri;
 
     Button editProfilBtn;
     public ProgressDialog dialog;
@@ -66,6 +67,17 @@ public class EditUkmActivity extends AppCompatActivity {
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         fAuth = FirebaseAuth.getInstance();
+
+        //data from product or project activity
+        Bundle intent = getIntent().getExtras();
+        assert intent != null;
+        imageUri = null;
+
+        if (getIntent().getExtras() !=  null){
+            imageUri = intent.getString(Config.PROFIL_PIC);
+        }
+
+
         userDb = FirebaseDatabase.getInstance().getReference("users").child(fAuth.getCurrentUser().getUid());
 
 
@@ -192,6 +204,9 @@ public class EditUkmActivity extends AppCompatActivity {
                               final String kabupaten, Uri profilPicUri) {
 
         storageReference = FirebaseStorage.getInstance().getReference().child("profil/"+fAuth.getCurrentUser().getUid()).child(Config.STORAGE_PATH + profilPicUri.getLastPathSegment());
+        storageReferenceOld = FirebaseStorage.getInstance().getReferenceFromUrl(imageUri);
+        storageReferenceOld.delete();
+
         StorageTask storageTask = storageReference.putFile(profilPicUri);
         Task<Uri> uriTask=storageTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
 

@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -24,8 +26,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -34,6 +39,8 @@ import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.model.ProductModel;
 import com.toharifqi.um.ukmq.model.ProgressModel;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -49,10 +56,14 @@ public class AddReport extends AppCompatActivity {
     private FirebaseAuth fAuth;
     private String productCat;
 
-    private TextInputLayout txtProgressWritter, txtProgressTitle, txtProgressDesc;
+    private TextInputLayout txtProgressDesc;
+    private TextView progressWriterTx, progressTitleTx;
 
     private ImageView progressPic;
     private Uri progressPicUri;
+
+    private String projectId, projectInvested;
+    private double projectInvestedPerMonth;
 
     Button addProgressBtn;
     public ProgressDialog dialog;
@@ -72,9 +83,15 @@ public class AddReport extends AppCompatActivity {
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-        txtProgressWritter = findViewById(R.id.progress_writter);
-        txtProgressTitle = findViewById(R.id.progress_title);
         txtProgressDesc = findViewById(R.id.progress_desc);
+        progressWriterTx = findViewById(R.id.progress_writer);
+        progressTitleTx = findViewById(R.id.progress_title);
+
+        progressTitleTx.setText(getIntent().getExtras().getString(Config.PROJECT_NAME));
+        progressWriterTx.setText(getIntent().getStringExtra(Config.USER_NAME));
+        projectId = getIntent().getStringExtra(Config.PROJECT_ID);
+        projectInvestedPerMonth = getIntent().getExtras().getDouble(Config.PROJECT_INVESTED_PER_MONTH);
+        projectInvested = getIntent().getExtras().getString(Config.PROJECT_INVESTED);
 
         progressPic = findViewById(R.id.progress_image);
         progressPic.setOnClickListener(new View.OnClickListener() {
@@ -99,19 +116,13 @@ public class AddReport extends AppCompatActivity {
         dialog = ProgressDialog.show(AddReport.this, "",
                 "Menambahkan data laporan progress baru. Mohon tunggu ...", true);
 
-        String progressWritter = txtProgressWritter.getEditText().getText().toString();
-        String progressTitle = txtProgressTitle.getEditText().getText().toString();
         String progreesDesc = txtProgressDesc.getEditText().getText().toString();
+        String progressWritter = progressWriterTx.getText().toString();
+        String progressTitle = progressTitleTx.getText().toString();
 
         boolean isNullPhotoUrl = progressPicUri == null;
 
-        if (progressWritter.isEmpty()){
-            showDialogNoInput();
-            txtProgressWritter.setError(REQUIRED);
-        }else if (progressTitle.isEmpty()){
-            showDialogNoInput();
-            txtProgressTitle.setError(REQUIRED);
-        }else if (progreesDesc.isEmpty()){
+        if (progreesDesc.isEmpty()){
             showDialogNoInput();
             txtProgressDesc.setError(REQUIRED);
         }else if(isNullPhotoUrl){
@@ -130,9 +141,11 @@ public class AddReport extends AppCompatActivity {
     private void writeNewPost(final String progressWritter, final String progressTitle,
                               final String progreesDesc, Uri progressPicUri) {
         String charRandom = generateString();
-        String productCodeNospaces = progressTitle.replace(" ", "");
-        final String progressId = productCodeNospaces.concat("-" + charRandom);
-        final String productIdUser = fAuth.getCurrentUser().getUid();
+        final Date timeStamp = Calendar.getInstance().getTime();
+        String notId = timeStamp.toString().replace(" ","");
+        String projectCodeNospaces = progressTitle.replace(" ", "");
+        final String progressId = projectCodeNospaces.concat("-" + charRandom + "-" + notId);
+        final String progressIdUser = fAuth.getCurrentUser().getUid();
 
         final String uniqueKey = mDatabaseReference.push().getKey();
         storageReference = FirebaseStorage.getInstance().getReference().child("progress/"+uniqueKey).child(Config.STORAGE_PATH + progressPicUri.getLastPathSegment());
@@ -153,14 +166,15 @@ public class AddReport extends AppCompatActivity {
                     Uri downloadURi=task.getResult();
 
 
-                    String city = Config.userKecamatan + ", " + Config.userKabupaten;
                     ProgressModel progress = new ProgressModel(progressWritter, progressTitle,
-                            progreesDesc, downloadURi.toString(), productIdUser);
+                            progreesDesc, downloadURi.toString(), progressId, timeStamp.toString(), progressIdUser);
 
                     Map<String, Object> postValues = progress.addProgress();
                     Map<String, Object> childUpdates = new HashMap<>();
 
-                    childUpdates.put("/products/" + progressId, postValues);
+                    incrementInvestedValue(projectInvestedPerMonth);
+
+                    childUpdates.put("/progress/" + progressId, postValues);
 
                     mDatabaseReference.updateChildren(childUpdates);
                     Toasty.success(getApplicationContext(), Config.BOOK_ADD_SUCCESS_MSG, Toasty.LENGTH_SHORT, true).show();
@@ -170,6 +184,16 @@ public class AddReport extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void incrementInvestedValue(final double investedperMonth) {
+        DatabaseReference projectDb = FirebaseDatabase.getInstance().getReference("projects").child(projectId).child("projectInvested");
+
+
+        double value = Double.parseDouble(projectInvested);
+        value = value + investedperMonth;
+        projectDb.setValue(value);
+        return;
     }
 
     private void setEditingEnabled(boolean enabled) {
@@ -199,7 +223,7 @@ public class AddReport extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Config.PHOTO_REQUEST_CODE && requestCode == RESULT_OK && data!=null){
+        if (requestCode == Config.PHOTO_REQUEST_CODE && resultCode == RESULT_OK && data!=null){
             progressPicUri = data.getData();
             progressPic.setImageURI(progressPicUri);
         }

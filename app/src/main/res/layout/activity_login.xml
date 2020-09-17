@@ -38,18 +38,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="UKM"
-                    android:layout_marginBottom="-10dp"
+                    android:text="OMAH "
                     android:textColor="@color/white"
-                    android:textSize="48sp"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-10dp"
-                    android:text="Q"
+                    android:text="UKM"
                     android:textColor="@color/orangeDark"
-                    android:textSize="48sp"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Rejowinangun"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -59,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:transitionName="slogan_animate"
                 android:textColor="@color/white"
-                android:text="Smart Management System for SME's"
+                android:text="UKM berdaya, Masyarakat Sejahtera"
                 android:textStyle="italic"
                 android:layout_marginTop="-5dp"/>
 

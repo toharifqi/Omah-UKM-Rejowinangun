@@ -26,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.toharifqi.um.ukmq.AllProductActivity;
 import com.toharifqi.um.ukmq.R;
 import com.toharifqi.um.ukmq.adapter.ProductGridAdapter;
+import com.toharifqi.um.ukmq.helpers.Config;
 import com.toharifqi.um.ukmq.listener.IFirebaseLoadDoneProduct;
 import com.toharifqi.um.ukmq.model.ProductModel;
 
@@ -79,8 +80,21 @@ public class tabProduct extends Fragment implements IFirebaseLoadDoneProduct {
         View view = inflater.inflate(R.layout.fragment_tab_product, container, false);
 
         productDb = FirebaseDatabase.getInstance().getReference("products");
+
         fUser = FirebaseAuth.getInstance().getCurrentUser();
-        query = productDb.orderByChild("productId").equalTo(fUser.getUid());
+
+        //data from product or project activity
+        Bundle intent = getActivity().getIntent().getExtras();
+        assert intent != null;
+        String uId = null;
+
+        if (getActivity().getIntent().getExtras() ==  null){
+            uId = fUser.getUid();
+        }else if (getActivity().getIntent().getExtras() != null){
+            uId = intent.getString(Config.USER_ID);
+        }
+
+        query = productDb.orderByChild("productId").equalTo(uId);
         emptyImage = view.findViewById(R.id.empty_image);
 
         iFirebaseLoadDone = this;

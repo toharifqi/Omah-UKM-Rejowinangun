@@ -11,25 +11,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.toharifqi.um.ukmq.ProfilActivity;
 import com.toharifqi.um.ukmq.R;
 import com.toharifqi.um.ukmq.helpers.Config;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
 public class tabProfile extends Fragment {
-    FirebaseAuth fAuth;
+    FirebaseUser fUser;
     DatabaseReference userDb;
     TextView txtKodePU, txtNamaUsaha, txtNamaPemilik,
             txtNamaMerk, txtTelepon, txtPIRT, txtBPOM, txtHalal, txtSNI, txtJalan, txtRtRw, txtKecamatan,
@@ -46,8 +44,20 @@ public class tabProfile extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tab_profile, container, false);
 
         //firebase initialization
-        fAuth = FirebaseAuth.getInstance();
-        userDb = FirebaseDatabase.getInstance().getReference("users").child(fAuth.getUid());
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        //data from product or project activity
+        Bundle intent = getActivity().getIntent().getExtras();
+        assert intent != null;
+        String uId = null;
+
+        if (getActivity().getIntent().getExtras() ==  null){
+            uId = fUser.getUid();
+        }else if (getActivity().getIntent().getExtras() != null){
+            uId = intent.getString(Config.USER_ID);
+        }
+
+        userDb = FirebaseDatabase.getInstance().getReference("users").child(uId);
 
         //initialization views
         txtKodePU = view.findViewById(R.id.profil_pu);
