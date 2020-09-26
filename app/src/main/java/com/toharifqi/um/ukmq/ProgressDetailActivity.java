@@ -2,6 +2,7 @@ package com.toharifqi.um.ukmq;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import com.toharifqi.um.ukmq.helpers.Config;
 
 public class ProgressDetailActivity extends AppCompatActivity {
 
+    String imageUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +39,14 @@ public class ProgressDetailActivity extends AppCompatActivity {
         progressTitle.setText(getIntent().getExtras().getString(Config.PROGRESS_TITLE));
         progressDate.setText(getIntent().getExtras().getString(Config.PROGRESS_DATE));
         progressDesc.setText(getIntent().getExtras().getString(Config.PROGRESS_DESC));
-        Glide.with(ProgressDetailActivity.this).load(getIntent().getExtras().getString(Config.PROGRESS_IMAGE)).into(docImage);
+        imageUrl = getIntent().getExtras().getString(Config.PROGRESS_IMAGE);
+        Glide.with(ProgressDetailActivity.this).load(imageUrl).into(docImage);
 
+    }
 
-
+    public void toZoomDoc(View view){
+        Intent intent = new Intent(ProgressDetailActivity.this, ZoomDocActivity.class);
+        intent.putExtra("imageUrl", imageUrl);
+        startActivity(intent);
     }
 }
