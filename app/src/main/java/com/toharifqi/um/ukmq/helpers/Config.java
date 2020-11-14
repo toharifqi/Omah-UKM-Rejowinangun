@@ -5,6 +5,7 @@ public class Config {
     public static final int PHOTO_REQUEST_CODE=1000;
     public final static String IMAGE_URL_NULL_MESSAGE="Pilihlah gambar produk!";
     public final static String CHECKOUT_NAME="Nama_Checkout";
+    public final static String CHECKOUT_PRICE="Price_Checkout";
     public final static String STORAGE_PATH="cover_photo/";
     public final static String BOOK_ADD_SUCCESS_MSG="Produk berhasil ditambahkan!";
     public final static String PROJECT_ADD_SUCCESS_MSG="Project berhasil ditambahkan!";
@@ -16,7 +17,9 @@ public class Config {
     public final static String PRODUCT_FASHION="Fashion";
     public final static String PROJECT_INVESTED_PER_MONTH="projectInvestedPerMonth";
     public final static String PROJECT_ID="projectId";
+    public final static String PRODUCTPROJECT_ID="projectNproductId";
     public final static String PROJECT_INVESTED="projectInvested";
+    public final static String PROJECTPRODUCT_TYPE="projectNproductType";
 
     public final static String PROGRESS_TITLE="progressTitle";
     public final static String PROGRESS_WRITER="progressWriter";

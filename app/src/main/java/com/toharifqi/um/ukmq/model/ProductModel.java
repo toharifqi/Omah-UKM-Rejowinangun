@@ -10,13 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProductModel implements Parcelable {
-    String productCode, productName, productDesc, productCat, productCity, productId, productPic;
+    String productCode, productName, productDesc, productCat, productCity, productId, productPic, parentId;
     int productPrice, productStock;
 
     public ProductModel() {
     }
 
-    public ProductModel(String productCode, String productName, String productDesc, String productCat, String productCity, String productId, String productPic, int productPrice, int productStock) {
+    public ProductModel(String productCode, String productName, String productDesc, String productCat,
+                        String productCity, String productId, String productPic, int productPrice,
+                        int productStock, String parentId) {
         this.productCode = productCode;
         this.productName = productName;
         this.productDesc = productDesc;
@@ -26,6 +28,7 @@ public class ProductModel implements Parcelable {
         this.productPic = productPic;
         this.productPrice = productPrice;
         this.productStock = productStock;
+        this.parentId = parentId;
     }
 
     protected ProductModel(Parcel in) {
@@ -36,6 +39,7 @@ public class ProductModel implements Parcelable {
         productCity = in.readString();
         productId = in.readString();
         productPic = in.readString();
+        parentId = in.readString();
         productPrice = in.readInt();
         productStock = in.readInt();
     }
@@ -124,6 +128,10 @@ public class ProductModel implements Parcelable {
         this.productStock = productStock;
     }
 
+    public String getParentId() {
+        return parentId;
+    }
+
     public Map<String, Object> addProduct() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("productCode", productCode);
@@ -135,6 +143,7 @@ public class ProductModel implements Parcelable {
         result.put("productPic", productPic);
         result.put("productPrice", productPrice);
         result.put("productStock", productStock);
+        result.put("parentId", parentId);
         return  result;
     }
 
@@ -152,6 +161,7 @@ public class ProductModel implements Parcelable {
         dest.writeString(productCity);
         dest.writeString(productId);
         dest.writeString(productPic);
+        dest.writeString(parentId);
         dest.writeInt(productPrice);
         dest.writeInt(productStock);
     }

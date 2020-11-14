@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,7 +7,7 @@
     android:background="@color/colorGreyLight"
     android:overScrollMode="never"
     android:scrollbars="none"
-    tools:context=".fragment.tabProject">
+    tools:context=".fragment.tabUnverifiedFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_gravity="center"
             android:id="@+id/recyclerview_id"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:overScrollMode="never"
             android:scrollbars="none"
             android:layout_height="0dp"

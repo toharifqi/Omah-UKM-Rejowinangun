@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ZoomDocActivity"></activity>
+        <activity android:name=".PaymentsDetailActivity"></activity>
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".ZoomDocActivity" />
         <activity android:name=".ProgressDetailActivity" />
         <activity android:name=".ProgressActivity" />
         <activity android:name=".OngoingProjectActivity" />
@@ -24,7 +26,7 @@
         <activity
             android:name=".ProfilActivity"
             android:theme="@style/AppThemeProfile" />
-        <activity android:name=".CheckInvestActivity" />
+        <activity android:name=".CheckOutActivity" />
         <activity android:name=".ProjectActivity" />
         <activity android:name=".ProductActivity" />
         <activity android:name=".AddProduct" />

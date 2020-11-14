@@ -203,6 +203,6 @@ public class RegisterActivity extends AppCompatActivity {
         UserModel userModel = new UserModel(userName, email, "", userName, "", "", "", "",
                 "", "", "", "", "", "", "", "", userType);
         userRef.child("users").child(uid).setValue(userModel);
-}
+    }
 
 }

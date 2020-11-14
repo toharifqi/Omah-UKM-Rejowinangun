@@ -8,11 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProductActivity extends AppCompatActivity {
     private ProductModel productModel;
     private DatabaseReference userDb;
+    private String price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class ProductActivity extends AppCompatActivity {
         TextView productCorp = findViewById(R.id.product_corp);
         final CircleImageView imageCorp = findViewById(R.id.image_corp);
 
+
         userDb = FirebaseDatabase.getInstance().getReference("users").child(productModel.getProductId());
 
         userDb.addValueEventListener(new ValueEventListener() {
@@ -75,7 +76,7 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
-        String price = NumberFormat.getNumberInstance(Locale.GERMAN).format(productModel.getProductPrice());
+        price = NumberFormat.getNumberInstance(Locale.GERMAN).format(productModel.getProductPrice());
 
         Glide.with(ProductActivity.this).load(productModel.getProductPic()).into(productImage);
         productName.setText(productModel.getProductName());
@@ -89,8 +90,11 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void toCheckOut(View view){
-        Intent intent = new Intent(ProductActivity.this, CheckInvestActivity.class);
+        Intent intent = new Intent(ProductActivity.this, CheckOutActivity.class);
         intent.putExtra(Config.CHECKOUT_NAME, productModel.getProductName());
+        intent.putExtra(Config.CHECKOUT_PRICE, "Rp. "+price);
+        intent.putExtra(Config.PRODUCTPROJECT_ID, productModel.getParentId());
+        intent.putExtra(Config.PROJECTPRODUCT_TYPE, "products");
         startActivity(intent);
     }
 

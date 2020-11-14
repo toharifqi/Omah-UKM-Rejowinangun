@@ -54,7 +54,6 @@ public class AddReport extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private StorageReference storageReference;
     private FirebaseAuth fAuth;
-    private String productCat;
 
     private TextInputLayout txtProgressDesc;
     private TextView progressWriterTx, progressTitleTx;

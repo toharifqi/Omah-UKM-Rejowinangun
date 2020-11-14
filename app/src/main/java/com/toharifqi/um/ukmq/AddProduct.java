@@ -184,7 +184,7 @@ public class AddProduct extends AppCompatActivity implements AdapterView.OnItemS
                     String city = Config.userKecamatan + ", " + Config.userKabupaten;
                     ProductModel product = new ProductModel(Config.userNamaUsaha, productName,
                             productDesc, productCat, city, productIdUser,
-                            downloadURi.toString(), productPrice, productStock);
+                            downloadURi.toString(), productPrice, productStock, productId);
 
                     Map<String, Object> postValues = product.addProduct();
                     Map<String, Object> childUpdates = new HashMap<>();

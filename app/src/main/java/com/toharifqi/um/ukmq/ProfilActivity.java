@@ -40,15 +40,11 @@ public class ProfilActivity extends AppCompatActivity {
 
     //tab stuff
     private ViewPager viewPager;
-    private TabItem tabProfil, tabProduk, tabProject;
-    private ViewPager viewPagerTab;
     private TabLayout tabLayout;
     private ProfilTabAdapter profilTabAdapter;
     private Button editButton;
     private String uId;
     private String profilPic;
-
-    StorageReference firebaseStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,9 +113,6 @@ public class ProfilActivity extends AppCompatActivity {
 
         //tabLayout
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabProfil = (TabItem) findViewById(R.id.tabProfil);
-        tabProduk = (TabItem) findViewById(R.id.tabProduk);
-        tabProject = (TabItem) findViewById(R.id.tabProject);
         viewPager = findViewById(R.id.viewPagerProfile);
 
         profilTabAdapter = new ProfilTabAdapter(getSupportFragmentManager(), tabLayout.getTabCount());

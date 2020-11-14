@@ -26,6 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProjectActivity extends AppCompatActivity {
     ProjectModel projectModel;
     private DatabaseReference userDb;
+    private String price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class ProjectActivity extends AppCompatActivity {
         final CircleImageView imageCorp = findViewById(R.id.image_corp);
 
         projectModel = getIntent().getExtras().getParcelable(Config.PROJECT_MODEL);
-        String price = NumberFormat.getNumberInstance(Locale.GERMAN).format(projectModel.getProjectPrice());
+        price = NumberFormat.getNumberInstance(Locale.GERMAN).format(projectModel.getProjectPrice());
 
         userDb = FirebaseDatabase.getInstance().getReference("users").child(projectModel.getProjectUserId());
 
@@ -81,8 +82,11 @@ public class ProjectActivity extends AppCompatActivity {
     }
 
     public void toCheckOut(View view){
-        Intent intent = new Intent(ProjectActivity.this, CheckInvestActivity.class);
+        Intent intent = new Intent(ProjectActivity.this, CheckOutActivity.class);
         intent.putExtra(Config.CHECKOUT_NAME, projectModel.getProjectName());
+        intent.putExtra(Config.CHECKOUT_PRICE, "Rp. "+price);
+        intent.putExtra(Config.PRODUCTPROJECT_ID, projectModel.getProjectParentId());
+        intent.putExtra(Config.PROJECTPRODUCT_TYPE, "projects");
         startActivity(intent);
     }
 

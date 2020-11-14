@@ -394,8 +394,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(HomeActivity.this, NewsActivity.class));
                 break;
             case R.id.nav_projek_berjalan:
-
                 startActivity(new Intent(HomeActivity.this, OngoingProjectActivity.class));
+                break;
+            case R.id.nav_trancsaction_history:
+                startActivity(new Intent(HomeActivity.this, HistoryActivity.class));
                 break;
         }
 

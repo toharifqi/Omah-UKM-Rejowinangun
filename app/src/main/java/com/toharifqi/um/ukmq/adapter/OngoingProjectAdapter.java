@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,7 @@ public class OngoingProjectAdapter extends RecyclerView.Adapter<OngoingProjectAd
     private Context context;
     private List<ProjectModel> projectModelList;
     private DatabaseReference userDb;
+    private FirebaseUser userRef;
 
     public OngoingProjectAdapter(Context context, List<ProjectModel> projectModelList) {
         this.context = context;
@@ -54,6 +57,10 @@ public class OngoingProjectAdapter extends RecyclerView.Adapter<OngoingProjectAd
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         final ProjectModel projectModel = projectModelList.get(position);
         userDb = FirebaseDatabase.getInstance().getReference("users").child(projectModel.getProjectUserId());
+        userRef = FirebaseAuth.getInstance().getCurrentUser();
+        if (userRef == null){
+            holder.uploadProgressBtn.setVisibility(View.GONE);
+        }
 
         userDb.addValueEventListener(new ValueEventListener() {
             @Override

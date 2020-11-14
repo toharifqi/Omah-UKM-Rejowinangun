@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        tools:context=".CheckInvestActivity">
+        tools:context=".CheckOutActivity">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -118,6 +118,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Jumlah yang harus dibayar"/>
                                 <TextView
+                                    android:id="@+id/checkout_price"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/colorBlack"
@@ -183,7 +184,7 @@
                             android:text="Upload bukti pembayaran disini jika Anda telah menyelesaikan pembayaran"
                             android:textColor="#2CB3AC"/>
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/check1"
+                            android:id="@+id/bank_provider"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -196,7 +197,7 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/check2"
+                            android:id="@+id/account_name"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -209,7 +210,7 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/check3"
+                            android:id="@+id/no_rekening"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -218,20 +219,20 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"/>
+                                android:inputType="number"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/check4"
+                            android:id="@+id/nominal_trans"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Nominal Transaksi">
+                            android:hint="Nominal Transaksi (Rp)">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"/>
+                                android:inputType="number"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
                         <TextView
@@ -244,7 +245,7 @@
                             android:background="@color/colorGreyLight"
                             android:padding="2dp"
                             android:layout_marginTop="10dp"
-                            android:id="@+id/product_image"
+                            android:id="@+id/checkout_image"
                             android:scaleType="centerInside"
                             android:src="@drawable/upload_picture"
                             android:layout_width="match_parent"
@@ -285,7 +286,7 @@
         android:layout_height="100dp">
 
         <Button
-            android:id="@+id/checkout"
+            android:id="@+id/checkout_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

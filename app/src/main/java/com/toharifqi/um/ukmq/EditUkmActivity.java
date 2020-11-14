@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -39,7 +40,7 @@ public class EditUkmActivity extends AppCompatActivity {
     private static final String TAG = "NewProjectActivity";
     private static final String REQUIRED = "Mohon masukkan data dengan benar.";
     private DatabaseReference mDatabaseReference, userDb;
-    private StorageReference storageReference, storageReferenceOld;
+    private StorageReference storageReference;
 
     TextInputLayout txtKodePu, txtNamaUsaha, txtNamaPemilik, txtNamaMerk, txtNoTelepon,
     txtPirt, txtBpom, txtHalal, txtSni, txtJalan, txtRt, txtKecamatan, txtKabupaten;
@@ -71,13 +72,13 @@ public class EditUkmActivity extends AppCompatActivity {
         //data from product or project activity
         Bundle intent = getIntent().getExtras();
         assert intent != null;
-        imageUri = null;
+
 
         if (getIntent().getExtras() !=  null){
             imageUri = intent.getString(Config.PROFIL_PIC);
         }
 
-
+        Toast.makeText(this, ""+ imageUri, Toast.LENGTH_SHORT).show();
         userDb = FirebaseDatabase.getInstance().getReference("users").child(fAuth.getCurrentUser().getUid());
 
 
@@ -204,8 +205,16 @@ public class EditUkmActivity extends AppCompatActivity {
                               final String kabupaten, Uri profilPicUri) {
 
         storageReference = FirebaseStorage.getInstance().getReference().child("profil/"+fAuth.getCurrentUser().getUid()).child(Config.STORAGE_PATH + profilPicUri.getLastPathSegment());
-        storageReferenceOld = FirebaseStorage.getInstance().getReferenceFromUrl(imageUri);
-        storageReferenceOld.delete();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        if (imageUri.isEmpty()){
+
+        }else {
+            StorageReference storageReferenceOld = storage.getReferenceFromUrl(imageUri);
+            storageReferenceOld.delete();
+        }
+
+
 
         StorageTask storageTask = storageReference.putFile(profilPicUri);
         Task<Uri> uriTask=storageTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
